@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server.dao.SystemUserDao">
+  <resultMap id="BaseResultMap" type="server.entity.SystemUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="n_id" jdbcType="INTEGER" property="nId" />
+    <result column="role" jdbcType="OTHER" property="role" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <delete id="deleteSystemUserByUserName" parameterType="java.lang.String">
+
+    DELETE FROM SystemUser
+    WHERE user_name=#{userName}
+
+  </delete>
+
+
+  <select id="findUserInfoByName" resultType="server.entity.SystemUser" parameterType="java.lang.String">
+
+    SELECT * FROM  SystemUser
+    WHERE user_name=#{userName}
+
+  </select>
+
+  <select id="queryRole" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT role FROM SystemUser
+    WHERE user_name=#{userName}
+  </select>
+
+  <select id="findAllUsers" resultType="server.entity.SystemUser">
+    SELECT * FROM SystemUser
+  </select>
+
+
+
+  <insert id="createSystemUser" parameterType="server.entity.SystemUser">
+
+    insert into SystemUser (n_id, `role`, user_name,
+                            `password`, phone)
+    values (#{nId,jdbcType=INTEGER}, #{role,jdbcType=OTHER}, #{userName,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+
+  </insert>
+
+  <update id="updateSystemUser" parameterType="server.entity.SystemUser">
+
+    update SystemUser
+    <set>
+      <if test="nId != null">
+        n_id = #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        `role` = #{role,jdbcType=OTHER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    WHERE user_name=#{userName}
+  </update>
+
+  <update id="updateUserPassword" parameterType="server.entity.SystemUser">
+    update SystemUser
+    <set>
+
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    WHERE user_name=#{userName}
+  </update>
+
+</mapper>

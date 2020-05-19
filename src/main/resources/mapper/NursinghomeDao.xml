@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server.dao.NursinghomeDao">
+  <resultMap id="BaseResultMap" type="server.entity.Nursinghome">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="NursingHomeName" jdbcType="VARCHAR" property="nursinghomename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, NursingHomeName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from NursingHome
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from NursingHome
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="server.entity.Nursinghome" useGeneratedKeys="true">
+    insert into NursingHome (NursingHomeName)
+    values (#{nursinghomename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="server.entity.Nursinghome" useGeneratedKeys="true">
+    insert into NursingHome
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nursinghomename != null">
+        NursingHomeName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nursinghomename != null">
+        #{nursinghomename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="server.entity.Nursinghome">
+    update NursingHome
+    <set>
+      <if test="nursinghomename != null">
+        NursingHomeName = #{nursinghomename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="server.entity.Nursinghome">
+    update NursingHome
+    set NursingHomeName = #{nursinghomename,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

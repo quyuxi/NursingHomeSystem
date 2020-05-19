@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server.dao.PhysiologicalDao">
+  <resultMap id="BaseResultMap" type="server.entity.Physiological">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="heart_rate" jdbcType="VARCHAR" property="heartRate" />
+    <result column="blood_pressure" jdbcType="INTEGER" property="bloodPressure" />
+    <result column="temperature" jdbcType="DOUBLE" property="temperature" />
+    <result column="elder_id" jdbcType="INTEGER" property="elderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, heart_rate, blood_pressure, temperature, elder_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Physiological
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Physiological
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="server.entity.Physiological" useGeneratedKeys="true">
+    insert into Physiological (heart_rate, blood_pressure, temperature, 
+      elder_id)
+    values (#{heartRate,jdbcType=VARCHAR}, #{bloodPressure,jdbcType=INTEGER}, #{temperature,jdbcType=DOUBLE}, 
+      #{elderId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="server.entity.Physiological" useGeneratedKeys="true">
+    insert into Physiological
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="elderId != null">
+        elder_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressure != null">
+        #{bloodPressure,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=DOUBLE},
+      </if>
+      <if test="elderId != null">
+        #{elderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="server.entity.Physiological">
+    update Physiological
+    <set>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure = #{bloodPressure,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=DOUBLE},
+      </if>
+      <if test="elderId != null">
+        elder_id = #{elderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="server.entity.Physiological">
+    update Physiological
+    set heart_rate = #{heartRate,jdbcType=VARCHAR},
+      blood_pressure = #{bloodPressure,jdbcType=INTEGER},
+      temperature = #{temperature,jdbcType=DOUBLE},
+      elder_id = #{elderId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

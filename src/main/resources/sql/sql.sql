@@ -3,7 +3,6 @@ SET foreign_key_checks = 0;
 /*
   老人
 */
-
 -- ----------------------------
 -- Table structure for Elder
 -- ----------------------------
@@ -21,12 +20,28 @@ CREATE TABLE `Elder` (
   `ring_id` int(255) NOT NULL  COMMENT '手环识别码',
   PRIMARY KEY (`id`,`ring_id`),
   KEY `n_id` (`n_id`),
-  KEY `id` (`id`),
   KEY `r_id` (`ring_id`),
   CONSTRAINT `n_id` FOREIGN KEY (`n_id`) REFERENCES `NursingHome` (`id`),
-  CONSTRAINT `r_id` FOREIGN KEY (`ring_id`) REFERENCES `Ring` (`id`)
+  CONSTRAINT `r_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+SET foreign_key_checks = 0;
+
+/*
+手环基本信息
+Ring
+*/
+-- ----------------------------
+-- Table structure for RingInfo
+-- ----------------------------
+DROP TABLE IF EXISTS `RingInfo`;
+CREATE TABLE `RingInfo` (
+       `ring_id` int(100) NOT NULL COMMENT '手环唯一识别码',
+       `power` int(3) NOT NULL COMMENT '电池电量',
+       PRIMARY KEY (`ring_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -35,29 +50,89 @@ CREATE TABLE `Elder` (
 SET foreign_key_checks = 0;
 /*
 
-Ring
+RingKeyInfo  手环按键信息
+字段待补充
 */
 -- ----------------------------
--- Table structure for Ring
+-- Table structure for RingKeyInfo
 -- ----------------------------
-DROP TABLE IF EXISTS `Ring`;
-CREATE TABLE `Ring` (
-  `id` int(100) NOT NULL,
-  `heart_rate` varchar(255) NOT NULL COMMENT '心率',
-  `blood_pressure` int(5) NOT NULL COMMENT '血压',
-  `triaxial_acceleration` varchar(50) NOT NULL COMMENT '三轴加速度',
-  `triaxial_angular_velocity` varchar(50) NOT NULL COMMENT '三轴角速度',
-  `temperature` double(10,0) NOT NULL COMMENT '体温',
-  `latitude` varchar(50) NOT NULL COMMENT '纬度',
-  `longitude` varchar(50) NOT NULL COMMENT '经度',
-  `power` int(3) NOT NULL COMMENT '电池',
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `RingKeyInfo`;
+CREATE TABLE `RingKeyInfo` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `elder_id` int(50) NOT NULL COMMENT '老人',
+  PRIMARY KEY (`id`),
+  KEY `RingKeyInfo_elder_id` (`elder_id`),
+  CONSTRAINT `RingKeyInfo_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
+/*
+  生理数据
+ */
 
+SET foreign_key_checks = 0;
+
+-- ----------------------------
+-- Table structure for Physiological
+-- ----------------------------
+DROP TABLE IF EXISTS `Physiological`;
+CREATE TABLE `Physiological` (
+        `id` int(100) NOT NULL AUTO_INCREMENT ,
+        `heart_rate` varchar(255) NOT NULL COMMENT '心率',
+        `blood_pressure` int(5) NOT NULL COMMENT '血压',
+        `temperature` double(10,0) NOT NULL COMMENT '体温',
+        `elder_id` int(50) NOT NULL COMMENT '老人',
+        PRIMARY KEY (`id`),
+        KEY `Physiological_elder_id` (`elder_id`),
+        CONSTRAINT `Physiological_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+/*
+  位置
+ */
+
+SET foreign_key_checks = 0;
+
+-- ----------------------------
+-- Table structure for Position
+-- ----------------------------
+DROP TABLE IF EXISTS `Position`;
+CREATE TABLE `Position` (
+         `id` int(100) NOT NULL AUTO_INCREMENT ,
+         `latitude` varchar(50) NOT NULL COMMENT '纬度',
+         `longitude` varchar(50) NOT NULL COMMENT '经度',
+         `elder_id` int(50) NOT NULL COMMENT '老人',
+         PRIMARY KEY (`id`),
+         KEY `Position_elder_id` (`elder_id`),
+         CONSTRAINT `Position_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+/*
+  姿势
+ */
+
+SET foreign_key_checks = 0;
+
+-- ----------------------------
+-- Table structure for Posture
+-- ----------------------------
+DROP TABLE IF EXISTS `Posture`;
+CREATE TABLE `Posture` (
+       `id` int(100) NOT NULL AUTO_INCREMENT ,
+       `triaxial_acceleration` varchar(50) NOT NULL COMMENT '三轴加速度',
+       `triaxial_angular_velocity` varchar(50) NOT NULL COMMENT '三轴角速度',
+       `elder_id` int(50) NOT NULL COMMENT '老人',
+       PRIMARY KEY (`id`),
+       KEY `Posture_elder_id` (`elder_id`),
+       CONSTRAINT `Posture_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 SET foreign_key_checks = 0;
@@ -100,8 +175,8 @@ CREATE TABLE `Relatives` (
   `address` varchar(255) NOT NULL COMMENT "家庭住址",
   `elder_id` int(50) NOT NULL COMMENT '老人',
   PRIMARY KEY (`id`),
-  KEY `elder_id` (`elder_id`),
-  CONSTRAINT `elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
+  KEY `Relatives_elder_id` (`elder_id`),
+  CONSTRAINT `Relatives_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
