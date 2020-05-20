@@ -1,73 +1,79 @@
 package server.constant;
 /**
- * LogUser��ز�����һЩ�̶��������ã����ַ�����
+ * LogUser相关操作的一些固定属性设置，如字符串等
  * @author Misui_user
  *
  */
 public final class LoginConstant {
 	/**
-	 * ��¼���󷵻ؽ������û�е�¼Ȩ��
+	 * 登录请求返回结果——没有登录权限
 	 */
 	public static final String LOGIN_NOPERMISSION="NOPERMISSION";
 	/**
-	 * ��¼���󷵻ؽ�������������
+	 * 登录请求返回结果——密码错误
 	 */
 	public static final String LOGIN_WRONGPASSWORD="WRONGPASSWORD";
 	/**
-	 * ��¼���󷵻ؽ����������Ա���ݵ�¼
+	 * 登录请求返回结果——管理员身份登录
 	 */
 	public static final String LOGIN_ADMINSTRATOR="ADMINISTRATOR";
 	/**
-	 * ��¼���󷵻ؽ��������ͨ�û����ݵ�¼
+	 * 登录请求返回结果——普通用户身份登录
 	 */
 	public static final String LOGIN_USERPERMIT="USERPERMIT";
 	/**
-	 * �����������û�����û�и��û�
+	 * 按姓名查找用户——没有改用户
 	 */
 	public static final String FINDUSER_NULL="null";
 	/**
-	 * �½��û������ɹ�
+	 * 新建用户——成功
 	 */
 	public static final String CREATE_SUCCESS="ADD_SUCCESS";
 	/**
-	 * �½��û�����ʧ��
+	 * 新建用户——失败
 	 */
 	public static final String CREATE_FAILD="ADD_FAILD";
 	/**
-	 * �½��û������û����ظ�
+	 * 新建用户——用户名重复
 	 */
 	public static final String CREATE__REPEATNAME="REPEATNAME";
 	/**
-	 * �����û���Ϣ�����ɹ�
+	 * 更新用户信息——成功
 	 */
 	public static final String UPDATE_SUCCESS = "UPDATE_SUCCESS";
 	/**
-	 * �����û���Ϣ����ʧ��
+	 * 更新用户信息——失败
 	 */
 	public static final String UPDATE_FAILD="UPDATE_FAILD";
 	/**
-	 * �����û���Ϣ����û�ж�Ӧ�û�
+	 * 更新用户信息——没有对应用户
 	 */
 	public static final String UPDATE_NULL="null";
 	/**
-	 * �����û����롪��û�ж�Ӧ�û�
+	 * 更改用户密码——没有对应用户
 	 */
 	public static final String PASSWORD_NULL="UPDATE_FAILD";
 	/**
-	 * �����û����롪���޸ĳɹ�
+	 * 更改用户密码——修改成功
 	 */
 	public static final String PASSWORD_SUCCESS="UPDATE_SUCCESS";
 	/**
-	 * �����û����롪���޸�ʧ��
+	 * 更改用户密码——修改失败
 	 */
 	public static final String PASSWORD_FAILD="UPDATE_FAILD";
 	/**
-	 * ɾ���û���������ʧ��
+	 * 删除用户——操作失败
 	 */
 	public static final String DELETE_FAILD="DEL_FAILD";
 	/**
-	 * ɾ���û����������ɹ�
+	 * 删除用户——操作成功
 	 */
 	public static final String DELETE_SUCCESS="DEL_SUCCESS";
+	/**
+	 * token 无效
+	 */
+	public static final String TOKEN_INVALID="TOKEN_INVALID";
+
+
 
 }

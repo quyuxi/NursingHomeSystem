@@ -17,7 +17,7 @@ import static server.constant.LoginConstant.*;
  */
 
 @RestController
-@RequestMapping(value="/user",produces="application/json; charset=utf-8")
+@RequestMapping(value="/user")
 public class SystemUserController {
 
 
@@ -32,7 +32,7 @@ public class SystemUserController {
      * @param user
      * @return
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestBody SystemUser user){
 
         SystemUser systemUser = systemUserService.findUserInfoByName(user.getUserName());

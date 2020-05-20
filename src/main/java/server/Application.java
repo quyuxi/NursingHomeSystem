@@ -5,15 +5,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * quyuxi
  */
 
-@MapperScan(basePackages = "com.iot_93.mapper")
+@MapperScan(basePackages = "server.dao")
 @SpringBootApplication
 @EnableCaching
 @ServletComponentScan
+@EnableSwagger2
 public class Application {
 
     public static void main(String[] args) {

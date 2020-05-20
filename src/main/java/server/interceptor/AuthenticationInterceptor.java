@@ -1,4 +1,4 @@
-package server.handler;
+package server.interceptor;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import server.annotation.Admin;
 import server.constant.Constant;
 import server.service.SystemUserService;
-import server.utils.HttpServletRequestUtils;
 import server.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static server.constant.LoginConstant.TOKEN_INVALID;
 
 
 /**
@@ -29,7 +30,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //验证token
-        if (hasPermission(request)) {
+        if (!hasPermission(request)) {
+            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), TOKEN_INVALID);
             return false;
         }
 
@@ -44,12 +46,15 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
     private boolean hasPermission(HttpServletRequest request) {
         String token = request.getHeader("token");
+        if (StringUtils.isEmpty(token)){
+            return false;
+        }
         String userName = JwtUtils.verity(token);
         //token无效
         if (StringUtils.isEmpty(userName)){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 
