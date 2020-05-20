@@ -1,20 +1,20 @@
 package server.entity;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * NursingHome
- * @author 
+ *
+ * @author
  */
 @Data
 public class Nursinghome implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
-
     /**
      * 养老院名
      */
     private String nursinghomename;
-
-    private static final long serialVersionUID = 1L;
 }

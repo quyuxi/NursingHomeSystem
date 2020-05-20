@@ -1,23 +1,23 @@
 package server.entity;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * RingInfo
- * @author 
+ *
+ * @author
  */
 @Data
 public class Ringinfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 手环唯一识别码
      */
     private Integer ringId;
-
     /**
      * 电池电量
      */
     private Integer power;
-
-    private static final long serialVersionUID = 1L;
 }

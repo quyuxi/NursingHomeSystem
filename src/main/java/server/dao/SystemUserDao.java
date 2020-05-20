@@ -9,7 +9,6 @@ import java.util.List;
 public interface SystemUserDao {
 
 
-
     SystemUser findUserInfoByName(String userName);
 
     String queryRole(String userName);

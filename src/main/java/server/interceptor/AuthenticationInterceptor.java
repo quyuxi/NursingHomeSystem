@@ -18,7 +18,8 @@ import static server.constant.LoginConstant.TOKEN_INVALID;
 
 
 /**
- * quyuxi
+ * @author  quyuxi
+ * @since 2020/5/20
  */
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
@@ -36,7 +37,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 验证admin权限
-        if (verityAdmin(handler,request)) {
+        if (verityAdmin(handler, request)) {
             return true;
         }
         // 如果没有权限，返回异常
@@ -46,20 +47,16 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
     private boolean hasPermission(HttpServletRequest request) {
         String token = request.getHeader("token");
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             return false;
         }
         String userName = JwtUtils.verity(token);
         //token无效
-        if (StringUtils.isEmpty(userName)){
-            return false;
-        }
-        return true;
+        return !StringUtils.isEmpty(userName);
     }
 
 
     private boolean verityAdmin(Object handler, HttpServletRequest request) {
-
 
 
         if (handler instanceof HandlerMethod) {
@@ -79,9 +76,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             String token = request.getHeader("token");
             String userName = JwtUtils.verity(token);
             String role = systemUserService.queryRole(userName);
-            if (!Constant.ADMIN.equals(role)){
-                return false;
-            }
+            return Constant.ADMIN.equals(role);
         }
         return true;
     }

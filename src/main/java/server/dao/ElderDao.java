@@ -1,18 +1,21 @@
 package server.dao;
 
+import org.springframework.stereotype.Component;
 import server.entity.Elder;
 import server.entity.ElderKey;
 
+import java.util.List;
+
+@Component
 public interface ElderDao {
-    int deleteByPrimaryKey(ElderKey key);
 
-    int insert(Elder record);
+    Elder selectElderById(int id);
 
-    int insertSelective(Elder record);
+    List<Elder> selectElderList();
 
-    Elder selectByPrimaryKey(ElderKey key);
+    boolean createElder(Elder elder);
 
-    int updateByPrimaryKeySelective(Elder record);
+    boolean updateElder(Elder elder);
 
-    int updateByPrimaryKey(Elder record);
+    boolean deleteElderById(Integer id);
 }

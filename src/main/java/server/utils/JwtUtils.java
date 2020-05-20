@@ -12,7 +12,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * quyuxi
+ * @author  quyuxi
+ * @since 2020/5/20
  */
 public class JwtUtils {
 
@@ -20,7 +21,7 @@ public class JwtUtils {
     /**
      * 过期时间为一天
      */
-    private static final long EXPIRE_TIME = 24*60*60*1000;
+    private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
 
     /**
      * token私钥
@@ -29,11 +30,12 @@ public class JwtUtils {
 
     /**
      * 生成签名
+     *
      * @param username
      * @param password
      * @return
      */
-    public static String sign(String username,String password){
+    public static String sign(String username, String password) {
         //过期时间
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         //私钥及加密算法
@@ -43,16 +45,17 @@ public class JwtUtils {
         header.put("typ", "JWT");
         header.put("alg", "HS256");
         //附带username和userID生成签名
-        return JWT.create().withHeader(header).withClaim("loginName",username)
-                .withClaim("password",password).withExpiresAt(date).sign(algorithm);
+        return JWT.create().withHeader(header).withClaim("loginName", username)
+                .withClaim("password", password).withExpiresAt(date).sign(algorithm);
     }
 
     /**
      * 验证
+     *
      * @param token
      * @return
      */
-    public static String verity(String token){
+    public static String verity(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
