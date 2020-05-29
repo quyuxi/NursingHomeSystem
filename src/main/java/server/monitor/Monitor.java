@@ -16,8 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Monitor {
 
 
-    @Value("ring.timeout")
-    private long ringTimeOut;
+
+    private static final long ringTimeOut = 60*1000;
 
 
     @Scheduled(fixedRate = 60 * 1000)

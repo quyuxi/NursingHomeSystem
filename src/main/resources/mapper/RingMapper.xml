@@ -20,7 +20,7 @@
               t1.date_time=t2.date_time
           and t2.date_time=t3.date_time
           and t3.date_time=t4.date_time
-          and t1.date_time>#{startTime} and t1.date_time < #{endTime}
+          and t1.date_time  &gt; #{startTime} and t1.date_time  &lt; #{endTime}
     </select>
 
   <select id="queryLastRingInfo" resultType="server.entity.RingInfo">
