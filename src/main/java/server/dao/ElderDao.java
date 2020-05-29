@@ -1,15 +1,15 @@
 package server.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import server.entity.Elder;
-import server.entity.ElderKey;
 
 import java.util.List;
 
 @Component
 public interface ElderDao {
 
-    Elder selectElderById(int id);
+    Elder selectElderById(@Param("elderId") String elderId);
 
     List<Elder> selectElderList();
 
@@ -17,5 +17,7 @@ public interface ElderDao {
 
     boolean updateElder(Elder elder);
 
-    boolean deleteElderById(Integer id);
+    boolean deleteElderById(@Param("elderId") String elderId);
+
+
 }

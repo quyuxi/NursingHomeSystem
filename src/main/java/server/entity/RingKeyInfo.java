@@ -5,27 +5,12 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * Physiological
+ * RingKeyInfo
  * @author 
  */
 @Data
-public class Physiological implements Serializable {
+public class RingKeyInfo implements Serializable {
     private Integer id;
-
-    /**
-     * 心率
-     */
-    private String heartRate;
-
-    /**
-     * 血压
-     */
-    private Integer bloodPressure;
-
-    /**
-     * 体温
-     */
-    private Double temperature;
 
     /**
      * 老人

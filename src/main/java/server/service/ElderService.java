@@ -17,8 +17,8 @@ public class ElderService {
     @Autowired
     ElderDao elderDao;
 
-    public Elder selectElderById(int id) {
-        return elderDao.selectElderById(id);
+    public Elder selectElderById(String elderId) {
+        return elderDao.selectElderById(elderId);
     }
 
     public List<Elder> selectElderList() {
@@ -37,7 +37,9 @@ public class ElderService {
         return elderDao.updateElder(elder);
     }
 
-    public boolean deleteElderById(Integer id) {
+    public boolean deleteElderById(String id) {
         return elderDao.deleteElderById(id);
     }
+
+
 }

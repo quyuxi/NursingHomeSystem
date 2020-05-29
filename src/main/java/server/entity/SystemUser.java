@@ -1,29 +1,34 @@
 package server.entity;
 
+import java.io.Serializable;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
- * @author  quyuxi
- * @since 2020/5/20
+ * SystemUser
+ * @author 
  */
 @Data
 public class SystemUser implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     /**
      * 所属养老院
      */
-    private Integer nId;
+    private String nId;
+
     /**
      * 角色：包括管理员和普通用户
      */
     private Object role;
+
     private String userName;
+
     private String password;
+
     /**
      * 手机号
      */
     private String phone;
+
+    private static final long serialVersionUID = 1L;
 }

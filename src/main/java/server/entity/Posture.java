@@ -1,28 +1,36 @@
 package server.entity;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
 
 /**
  * Posture
- *
- * @author
+ * @author 
  */
 @Data
 public class Posture implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     /**
      * 三轴加速度
      */
     private String triaxialAcceleration;
+
     /**
      * 三轴角速度
      */
     private String triaxialAngularVelocity;
+
     /**
      * 老人
      */
-    private Integer elderId;
+    private String elderId;
+
+    /**
+     * 最后更新时间
+     */
+    private Long dateTime;
+
+    private static final long serialVersionUID = 1L;
 }

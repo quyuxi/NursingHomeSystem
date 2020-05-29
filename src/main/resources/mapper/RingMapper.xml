@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="server.dao.RingDao">
+  <resultMap id="BaseResultMap" type="server.entity.RingInfo">
+    <id column="ring_id" jdbcType="INTEGER" property="ringId" />
+    <result column="power" jdbcType="INTEGER" property="power" />
+  </resultMap>
+
+
+
+
+
+    <select id="queryDataByTime" resultType="java.util.Map">
+
+        SELECT *
+
+        FROM Position as t1,Posture as t2,Physiological as t3,RingInfo as t3,RingKeyInfo as t4
+
+        WHERE
+              t1.date_time=t2.date_time
+          and t2.date_time=t3.date_time
+          and t3.date_time=t4.date_time
+          and t1.date_time>#{startTime} and t1.date_time < #{endTime}
+    </select>
+
+  <select id="queryLastRingInfo" resultType="server.entity.RingInfo">
+    select * from RingInfo where elder_id=#{elderId} order by id DESC limit 1
+  </select>
+
+  <select id="queryLastPosture" resultType="server.entity.Posture">
+    select * from Posture where elder_id=#{elderId} order by id DESC limit 1
+  </select>
+  <select id="queryLastPhysiological" resultType="server.entity.Physiological">
+    select * from Physiological where elder_id=#{elderId} order by id DESC limit 1
+  </select>
+  <select id="queryLastPosition" resultType="server.entity.Position">
+    select * from Position where elder_id=#{elderId} order by id DESC limit 1
+  </select>
+
+
+  <insert id="insertPosition" parameterType="server.entity.Position">
+    insert into Position values (null,#{latitude},#{longitude},#{elderId},#{dateTime})
+  </insert>
+  <insert id="insertPosture" parameterType="server.entity.Posture">
+    insert into Posture values (null,#{triaxialAcceleration},#{triaxialAngularVelocity},#{elderId},#{dateTime})
+  </insert>
+  <insert id="insertPhysiological" parameterType="server.entity.Physiological">
+    insert into Physiological values (null,#{heartRate},#{bloodPressure},#{temperature},#{elderId},#{dateTime})
+  </insert>
+  <insert id="insertRingInfo" parameterType="server.entity.RingInfo">
+
+    insert into RingInfo values (null,#{ringId},#{power},#{elderId},#{dateTime})
+  </insert>
+
+</mapper>

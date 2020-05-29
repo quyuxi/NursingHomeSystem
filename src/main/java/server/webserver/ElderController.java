@@ -24,11 +24,9 @@ public class ElderController {
 	ElderService elderService;
 
 
-
-
-	@GetMapping(value="/find/{id}")
-	public Object getElderByID(@PathVariable("id") int id) {
-		Elder elder=elderService.selectElderById(id);
+	@GetMapping(value="/find/{elderId}")
+	public Object getElderByID(@PathVariable("elderId") String elderId) {
+		Elder elder=elderService.selectElderById(elderId);
 		if(elder==null)
 			return FINDELDER_NULL;
 		return elder;

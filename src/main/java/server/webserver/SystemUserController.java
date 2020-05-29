@@ -43,7 +43,7 @@ public class SystemUserController {
 
     }
 
-    //返回指定用户名的用户信息
+
     @Admin
     @RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
     public Object findUserInfo(@PathVariable("name") String userName) {
@@ -54,7 +54,7 @@ public class SystemUserController {
         return user;
     }
 
-    //列举所有成员
+
     @Admin
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public List<SystemUser> lisLogUser() {
@@ -62,7 +62,7 @@ public class SystemUserController {
         return users;
     }
 
-    //新建桌面用户信息
+
     @Admin
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createNewUser(@RequestBody SystemUser user) {
@@ -77,7 +77,7 @@ public class SystemUserController {
         return CREATE_FAILD;
     }
 
-    //修改用户信息——原则上只能修改姓名和密码
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateUser(@RequestBody SystemUser user) {
         if (systemUserService.findUserInfoByName(user.getUserName()) == null) {
@@ -89,7 +89,7 @@ public class SystemUserController {
         return UPDATE_FAILD;
     }
 
-    //修改用户的密码——这里采用template.updateUser(pauser)方法实现
+
     @RequestMapping(value = "/password", method = RequestMethod.POST)
     public String amendPassword(@RequestBody SystemUser user) {
 
@@ -98,7 +98,7 @@ public class SystemUserController {
         return PASSWORD_FAILD;
     }
 
-    //该方法被管理员身份的用户调用——————————————后续需要添加过滤器处理
+
     @Admin
     @RequestMapping(value = "/delete/{deleteName}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("deleteName") String name) {

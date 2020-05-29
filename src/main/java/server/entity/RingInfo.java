@@ -1,31 +1,31 @@
 package server.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * Physiological
+ * RingInfo
  * @author 
  */
 @Data
-public class Physiological implements Serializable {
+public class RingInfo implements Serializable {
+
+    /**
+     * id
+     *
+     *
+     */
+
     private Integer id;
+    /**
+     * 手环唯一识别码
+     */
+    private String ringId;
 
     /**
-     * 心率
+     * 电池电量
      */
-    private String heartRate;
-
-    /**
-     * 血压
-     */
-    private Integer bloodPressure;
-
-    /**
-     * 体温
-     */
-    private Double temperature;
+    private Integer power;
 
     /**
      * 老人
@@ -35,7 +35,7 @@ public class Physiological implements Serializable {
     /**
      * 最后更新时间
      */
-    private Long dateTime;
+    private String dateTime;
 
     private static final long serialVersionUID = 1L;
 }
