@@ -1,6 +1,6 @@
 
 
-
+CREATE DATABASE IF NOT EXISTS NursingHomeSystem DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 SET foreign_key_checks = 0;
 /*

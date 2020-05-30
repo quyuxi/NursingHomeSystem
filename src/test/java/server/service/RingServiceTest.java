@@ -24,20 +24,23 @@ public class RingServiceTest {
     @Autowired
     RingService ringService;
 
-    private String eid="93010001";
+    private String elerid="93010001";
 
     
 
 
     @Test
     public void insertRingdata() throws InterruptedException {
+
         for (int i = 0; i <1000 ; i++) {
             Thread.sleep(1000);
+
             Date date = new Date();
-            Position position = new Position(null,"test"+i,"test"+i,eid,date);
-            Posture posture = new Posture(null,"test"+i,"test"+i,eid,date );
-            Physiological physiological = new Physiological(null,"test"+i,100,87.4,eid,date);
-            RingInfo ringInfo = new RingInfo(null,"1111",99,eid,date);
+            Position position = new Position(null,"test"+i,"test"+i,elerid,date);
+            Posture posture = new Posture(null,"test"+i,"test"+i,elerid,date );
+            Physiological physiological = new Physiological(null,"test"+i,100,87.4,elerid,date);
+            RingInfo ringInfo = new RingInfo(null,"1111",99,elerid,date);
+
             System.out.println(ringService.insertRingData(position,posture,physiological,ringInfo));
         }
 
@@ -45,7 +48,7 @@ public class RingServiceTest {
 
     @Test
     public void quertByTime() throws InterruptedException {
-        List<Map<String, String>> maps = ringService.queryDataByTime(eid, "2020-05-30 11:35:34", "2020-05-30 11:54:12");
+        List<Map<String, String>> maps = ringService.queryDataByTime(elerid, "2020-05-30 11:35:34", "2020-05-30 11:54:12");
 //        System.out.println(JSON.toJSONString(maps,true));
 
     }
