@@ -30,7 +30,18 @@ public class Position implements Serializable {
     /**
      * 最后更新时间
      */
-    private Long dateTime;
+    private Date dateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public Position() {
+    }
+
+    public Position(Integer id, String latitude, String longitude, String elderId, Date dateTime) {
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.elderId = elderId;
+        this.dateTime = dateTime;
+    }
 }

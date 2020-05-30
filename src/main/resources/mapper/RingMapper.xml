@@ -14,7 +14,7 @@
 
         SELECT *
 
-        FROM Position as t1,Posture as t2,Physiological as t3,RingInfo as t3,RingKeyInfo as t4
+        FROM Position as t1,Posture as t2,Physiological as t3,RingInfo as t4
 
         WHERE
               t1.date_time=t2.date_time

@@ -20,7 +20,7 @@ public class RingKeyInfo implements Serializable {
     /**
      * 最后更新时间
      */
-    private Long dateTime;
+    private Date dateTime;
 
     private static final long serialVersionUID = 1L;
 }

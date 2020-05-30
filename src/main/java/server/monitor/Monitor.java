@@ -8,6 +8,7 @@ import server.cache.RingDataCache;
 import server.entity.RingData;
 import server.entity.SystemUser;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,9 +29,9 @@ public class Monitor {
         for (String elderId : keySet) {
 
             RingData ringData = RingDataCache.cache.get(elderId);
-            Long dateTime = ringData.getPosition().getDateTime();
+            Date dateTime = ringData.getPosition().getDateTime();
 
-            if ((System.currentTimeMillis()-dateTime)>ringTimeOut){
+            if ((System.currentTimeMillis()-dateTime.getTime())>ringTimeOut){
                 //TODO 告警
             }
 

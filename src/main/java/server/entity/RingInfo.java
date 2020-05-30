@@ -1,6 +1,8 @@
 package server.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -35,7 +37,18 @@ public class RingInfo implements Serializable {
     /**
      * 最后更新时间
      */
-    private String dateTime;
+    private Date dateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public RingInfo(Integer id, String ringId, Integer power, String elderId, Date dateTime) {
+        this.id = id;
+        this.ringId = ringId;
+        this.power = power;
+        this.elderId = elderId;
+        this.dateTime = dateTime;
+    }
+
+    public RingInfo() {
+    }
 }

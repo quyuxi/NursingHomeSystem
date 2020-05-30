@@ -18,7 +18,7 @@ CREATE TABLE `Elder` (
   `birthday` date  NOT NULL COMMENT "出生日期",
   `phone` varchar(255) NOT NULL COMMENT "手机号",
   `id_card` varchar(255) NOT NULL COMMENT "身份证号",
-  `start_time` varchar(255) NOT NULL COMMENT "入院时间",
+  `start_time` datetime NOT NULL COMMENT "入院时间",
   `address` varchar(255) NOT NULL COMMENT "家庭住址",
   `n_id` varchar(50) NOT NULL  COMMENT '所属养老院id',
   `area` varchar(255) NOT NULL  COMMENT '活动范围',
@@ -45,7 +45,7 @@ CREATE TABLE `RingInfo` (
        `ring_id` varchar(100) NOT NULL COMMENT '手环唯一识别码',
        `power` int(3) NOT NULL COMMENT '电池电量',
        `elder_id` varchar(50) NOT NULL COMMENT '老人',
-       `date_time` long NOT NULL COMMENT '最后更新时间',
+       `date_time` datetime NOT NULL COMMENT '最后更新时间',
        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `RingKeyInfo`;
 CREATE TABLE `RingKeyInfo` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `elder_id` varchar(50) NOT NULL COMMENT '老人',
-  `date_time` long NOT NULL COMMENT '最后更新时间',
+  `date_time` datetime NOT NULL COMMENT '最后更新时间',
   PRIMARY KEY (`id`),
   KEY `RingKeyInfo_elder_id` (`elder_id`),
   CONSTRAINT `RingKeyInfo_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
@@ -91,7 +91,7 @@ CREATE TABLE `Physiological` (
         `blood_pressure` int(5) NOT NULL COMMENT '血压',
         `temperature` double(10,0) NOT NULL COMMENT '体温',
         `elder_id` varchar(50) NOT NULL COMMENT '老人',
-        `date_time` long NOT NULL COMMENT '最后更新时间',
+        `date_time` datetime NOT NULL COMMENT '最后更新时间',
         PRIMARY KEY (`id`),
         KEY `Physiological_elder_id` (`elder_id`),
         CONSTRAINT `Physiological_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
@@ -114,7 +114,7 @@ CREATE TABLE `Position` (
          `latitude` varchar(50) NOT NULL COMMENT '纬度',
          `longitude` varchar(50) NOT NULL COMMENT '经度',
          `elder_id` varchar(50) NOT NULL COMMENT '老人',
-         `date_time` long NOT NULL COMMENT '最后更新时间',
+         `date_time` datetime NOT NULL COMMENT '最后更新时间',
          PRIMARY KEY (`id`),
          KEY `Position_elder_id` (`elder_id`),
          CONSTRAINT `Position_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)
@@ -138,7 +138,7 @@ CREATE TABLE `Posture` (
        `triaxial_acceleration` varchar(50) NOT NULL COMMENT '三轴加速度',
        `triaxial_angular_velocity` varchar(50) NOT NULL COMMENT '三轴角速度',
        `elder_id` varchar(50) NOT NULL COMMENT '老人',
-       `date_time` long NOT NULL COMMENT '最后更新时间',
+       `date_time` datetime NOT NULL COMMENT '最后更新时间',
        PRIMARY KEY (`id`),
        KEY `Posture_elder_id` (`elder_id`),
        CONSTRAINT `Posture_elder_id` FOREIGN KEY (`elder_id`) REFERENCES `Elder` (`id`)

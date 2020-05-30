@@ -35,7 +35,19 @@ public class Physiological implements Serializable {
     /**
      * 最后更新时间
      */
-    private Long dateTime;
+    private Date dateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public Physiological() {
+    }
+
+    public Physiological(Integer id, String heartRate, Integer bloodPressure, Double temperature, String elderId, Date dateTime) {
+        this.id = id;
+        this.heartRate = heartRate;
+        this.bloodPressure = bloodPressure;
+        this.temperature = temperature;
+        this.elderId = elderId;
+        this.dateTime = dateTime;
+    }
 }

@@ -30,7 +30,18 @@ public class Posture implements Serializable {
     /**
      * 最后更新时间
      */
-    private Long dateTime;
+    private Date dateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public Posture() {
+    }
+
+    public Posture(Integer id, String triaxialAcceleration, String triaxialAngularVelocity, String elderId, Date dateTime) {
+        this.id = id;
+        this.triaxialAcceleration = triaxialAcceleration;
+        this.triaxialAngularVelocity = triaxialAngularVelocity;
+        this.elderId = elderId;
+        this.dateTime = dateTime;
+    }
 }
