@@ -5,47 +5,47 @@ public class ElderConstant {
 
 
     /**
-     * ²éÑ¯ÀÏÈËÐÅÏ¢Îª¿ÕÊ±£¬·µ»ØµÄ×Ö·û´®
+     * æŸ¥è¯¢è€äººä¿¡æ¯ä¸ºç©ºæ—¶ï¼Œè¿”å›žçš„å­—ç¬¦ä¸²
      */
     public static final String FINDELDER_NULL="null";
     /**
-     * Èç¹ûÊý¾Ý¿âÖÐÃ»ÓÐÈÎºÎÀÏÈËÐÅÏ¢Ê±£¬·µ»Ø×Ö·û´®
+     * å¦‚æžœæ•°æ®åº“ä¸­æ²¡æœ‰ä»»ä½•è€äººä¿¡æ¯æ—¶ï¼Œè¿”å›žå­—ç¬¦ä¸²
      */
     public static final String LISTELDER_NULL="null";
     /**
-     * °´ÐÕÃû²éÕÒÀÏÈË¡ª¡ªÃ»ÓÐ¸ÄÓÃ»§
+     * æŒ‰å§“åæŸ¥æ‰¾è€äººâ€”â€”æ²¡æœ‰æ”¹ç”¨æˆ·
      */
     public static final String FINDUSER_NULL="null";
     /**
-     * ÐÂ½¨ÀÏÈË¡ª¡ª³É¹¦
+     * æ–°å»ºè€äººâ€”â€”æˆåŠŸ
      */
     public static final String CREATE_SUCCESS="ADD_SUCCESS";
     /**
-     * ÐÂ½¨ÀÏÈË¡ª¡ªÊ§°Ü
+     * æ–°å»ºè€äººâ€”â€”å¤±è´¥
      */
     public static final String CREATE_FAILD="ADD_FAILD";
     /**
-     * ¸üÐÂÀÏÈËÐÅÏ¢¡ª¡ª³É¹¦
+     * æ›´æ–°è€äººä¿¡æ¯â€”â€”æˆåŠŸ
      */
     public static final String UPDATE_SUCCESS = "UPDATE_SUCCESS";
     /**
-     * ¸üÐÂÀÏÈËÐÅÏ¢¡ª¡ªÊ§°Ü
+     * æ›´æ–°è€äººä¿¡æ¯â€”â€”å¤±è´¥
      */
     public static final String UPDATE_FAILD="UPDATE_FAILD";
     /**
-     * ¸üÐÂÀÏÈËÐÅÏ¢¡ª¡ªÃ»ÓÐ¶ÔÓ¦ÓÃ»§
+     * æ›´æ–°è€äººä¿¡æ¯â€”â€”æ²¡æœ‰å¯¹åº”ç”¨æˆ·
      */
     public static final String UPDATE_NULL="null";
     /**
-     * É¾³ýÀÏÈËÐÅÏ¢¡ª¡ª²Ù×÷Ê§°Ü
+     * åˆ é™¤è€äººä¿¡æ¯â€”â€”æ“ä½œå¤±è´¥
      */
     public static final String DELETE_FAILD="DEL_FAILD";
     /**
-     * É¾³ýÀÏÈËÐÅÏ¢¡ª¡ª²Ù×÷³É¹¦
+     * åˆ é™¤è€äººä¿¡æ¯â€”â€”æ“ä½œæˆåŠŸ
      */
     public static final String DELETE_SUCCESS="DEL_SUCCESS";
     /**
-     * É¾³ýÀÏÈËÐÅÏ¢¡ª¡ªÃ»ÓÐ¶ÔÓ¦ÀÏÈË
+     * åˆ é™¤è€äººä¿¡æ¯â€”â€”æ²¡æœ‰å¯¹åº”è€äºº
      */
     public static final String DELETE_NULL="null";
 

@@ -58,8 +58,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public List<SystemUser> lisLogUser() {
-        List<SystemUser> users = systemUserService.findAllUsers();
-        return users;
+        return systemUserService.findAllUsers();
     }
 
 
