@@ -18,7 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(authenticationInterceptor)// 注册拦截器
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/swagger-ui.html")
-                .addPathPatterns("/user/**");
+                .addPathPatterns("/user/**")
+                .addPathPatterns("/ring/**")
+                .addPathPatterns("/elder/**");
     }
 
 

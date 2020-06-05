@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="server.dao.RingDao">
-  <resultMap id="BaseResultMap" type="server.entity.RingInfo">
-    <id column="ring_id" jdbcType="INTEGER" property="ringId" />
-    <result column="power" jdbcType="INTEGER" property="power" />
+
+
+  <resultMap id="RinginfoMap" type="server.entity.RingInfo">
+    <id column="ring_id" jdbcType="VARCHAR" property="ringId" />
+    <result column="battery" jdbcType="INTEGER" property="battery" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
   </resultMap>
 
+  <resultMap id="PhysiologicalMap" type="server.entity.Physiological">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="heart_rate" jdbcType="VARCHAR" property="heartRate" />
+    <result column="blood_pressure" jdbcType="INTEGER" property="bloodPressure" />
+    <result column="temperature" jdbcType="DOUBLE" property="temperature" />
+    <result column="ring_id" jdbcType="VARCHAR" property="ringId" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+  </resultMap>
+
+  <resultMap id="PositionMap" type="server.entity.Position">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="ring_id" jdbcType="VARCHAR" property="ringId" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+  </resultMap>
+  <resultMap id="PostureMap" type="server.entity.Posture">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="triaxial_acceleration" jdbcType="VARCHAR" property="triaxialAcceleration" />
+    <result column="triaxial_angular_velocity" jdbcType="VARCHAR" property="triaxialAngularVelocity" />
+    <result column="ring_id" jdbcType="VARCHAR" property="ringId" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+  </resultMap>
+
+  <resultMap id="RingkeyinfoMap" type="server.entity.Ringkeyinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ring_id" jdbcType="VARCHAR" property="ringId" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+  </resultMap>
+
+  <update id="updateRingInfo" parameterType="server.entity.RingInfo">
+
+    update RingInfo
+    set battery=#{power}
+    where ring_id=#{ring_id}
+
+  </update>
 
 
-
-
-    <select id="queryDataByTime" resultType="java.util.Map">
+  <select id="queryDataByTime" resultType="java.util.Map">
 
         SELECT *
 
@@ -23,33 +61,38 @@
           and t1.date_time  &gt; #{startTime} and t1.date_time  &lt; #{endTime}
     </select>
 
-  <select id="queryLastRingInfo" resultType="server.entity.RingInfo">
-    select * from RingInfo where elder_id=#{elderId} order by id DESC limit 1
+  <select id="queryLastRingInfo" resultMap="RinginfoMap">
+    select * from RingInfo where ring_id=#{ringId}
   </select>
 
-  <select id="queryLastPosture" resultType="server.entity.Posture">
-    select * from Posture where elder_id=#{elderId} order by id DESC limit 1
+  <select id="queryLastPosture" resultMap="PostureMap">
+    select * from Posture where ring_id=#{ringId} order by id DESC limit 1
   </select>
-  <select id="queryLastPhysiological" resultType="server.entity.Physiological">
-    select * from Physiological where elder_id=#{elderId} order by id DESC limit 1
-  </select>
-  <select id="queryLastPosition" resultType="server.entity.Position">
-    select * from Position where elder_id=#{elderId} order by id DESC limit 1
+  <select id="queryLastPhysiological" resultMap="PhysiologicalMap">
+    select * from Physiological where ring_id=#{ringId} order by id DESC limit 1
   </select>
 
+  <select id="queryLastPosition" resultMap="PositionMap">
+    select * from Position where ring_id=#{ringId} order by id DESC limit 1
+  </select>
+    <select id="getSafeArea" resultType="java.lang.String">
+    select  area from Elder where elder_id=#{elderId}
+    </select>
 
-  <insert id="insertPosition" parameterType="server.entity.Position">
-    insert into Position values (null,#{latitude},#{longitude},#{elderId},#{dateTime})
+
+    <insert id="insertPosition" parameterType="server.entity.Position">
+    insert into Position values (null,#{latitude},#{longitude},#{ringId},#{dateTime})
   </insert>
+
   <insert id="insertPosture" parameterType="server.entity.Posture">
-    insert into Posture values (null,#{triaxialAcceleration},#{triaxialAngularVelocity},#{elderId},#{dateTime})
+
+    insert into Posture values (null,#{triaxialAcceleration},#{triaxialAngularVelocity},#{ringId},#{dateTime})
   </insert>
   <insert id="insertPhysiological" parameterType="server.entity.Physiological">
-    insert into Physiological values (null,#{heartRate},#{bloodPressure},#{temperature},#{elderId},#{dateTime})
+    insert into Physiological values (null,#{heartRate},#{bloodPressure},#{temperature},#{ringId},#{dateTime})
   </insert>
   <insert id="insertRingInfo" parameterType="server.entity.RingInfo">
-
-    insert into RingInfo values (null,#{ringId},#{power},#{elderId},#{dateTime})
+    insert into RingInfo values (#{ringId},#{power},#{dateTime})
   </insert>
 
 </mapper>

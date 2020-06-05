@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class Elder implements Serializable {
-    private String id;
+    private String elderId;
 
     /**
      * 姓名
@@ -40,12 +40,17 @@ public class Elder implements Serializable {
     /**
      * 入院时间
      */
-    private String startTime;
+    private Date startTime;
 
     /**
      * 家庭住址
      */
     private String address;
+
+    /**
+     * 手环id
+     */
+    private String ringId;
 
     /**
      * 所属养老院id
@@ -54,6 +59,23 @@ public class Elder implements Serializable {
 
     /**
      * 活动范围
+     */
+
+    /*
+
+    [
+        {
+            ‘lng’:'',
+            ‘lat’:'',
+        },
+         {
+            ‘lng’:'',
+            ‘lat’:'',
+        }
+
+
+    ]
+
      */
     private String area;
 

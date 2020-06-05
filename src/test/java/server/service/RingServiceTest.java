@@ -1,7 +1,6 @@
 package server.service;
 
 
-import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +31,6 @@ public class RingServiceTest {
     @Test
     public void insertRingdata() throws InterruptedException {
 
-        for (int i = 0; i <1000 ; i++) {
-            Thread.sleep(1000);
-
-            Date date = new Date();
-            Position position = new Position(null,"test"+i,"test"+i,elerid,date);
-            Posture posture = new Posture(null,"test"+i,"test"+i,elerid,date );
-            Physiological physiological = new Physiological(null,"test"+i,100,87.4,elerid,date);
-            RingInfo ringInfo = new RingInfo(null,"1111",99,elerid,date);
-
-            System.out.println(ringService.insertRingData(position,posture,physiological,ringInfo));
-        }
 
     }
 

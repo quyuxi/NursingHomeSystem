@@ -18,7 +18,7 @@ public class OverstepEmergencyListener extends EmergencyListener {
     protected EmergencyEvent newEmergency(RingRecord record) {
         return new EmergencyEvent(EmergencyType.OVERSTEP, record);
     }
-    
+
     private Position[] getSafeArea(int elderId) {
         return IotUitls.getSafeArea(elderId);
     }

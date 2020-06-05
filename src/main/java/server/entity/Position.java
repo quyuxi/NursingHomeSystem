@@ -23,9 +23,9 @@ public class Position implements Serializable {
     private String longitude;
 
     /**
-     * 老人
+     * 手环id
      */
-    private String elderId;
+    private String ringId;
 
     /**
      * 最后更新时间
@@ -37,11 +37,11 @@ public class Position implements Serializable {
     public Position() {
     }
 
-    public Position(Integer id, String latitude, String longitude, String elderId, Date dateTime) {
+    public Position(Integer id, String latitude, String longitude, String ringId, Date dateTime) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.elderId = elderId;
+        this.ringId = ringId;
         this.dateTime = dateTime;
     }
 }

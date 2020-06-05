@@ -23,9 +23,9 @@ public class Posture implements Serializable {
     private String triaxialAngularVelocity;
 
     /**
-     * 老人
+     * 手环id
      */
-    private String elderId;
+    private String ringId;
 
     /**
      * 最后更新时间
@@ -37,11 +37,11 @@ public class Posture implements Serializable {
     public Posture() {
     }
 
-    public Posture(Integer id, String triaxialAcceleration, String triaxialAngularVelocity, String elderId, Date dateTime) {
+    public Posture(Integer id, String triaxialAcceleration, String triaxialAngularVelocity, String ringId, Date dateTime) {
         this.id = id;
         this.triaxialAcceleration = triaxialAcceleration;
         this.triaxialAngularVelocity = triaxialAngularVelocity;
-        this.elderId = elderId;
+        this.ringId = ringId;
         this.dateTime = dateTime;
     }
 }

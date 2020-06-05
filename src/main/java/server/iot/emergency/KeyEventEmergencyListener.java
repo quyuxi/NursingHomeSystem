@@ -2,7 +2,7 @@ package server.iot.emergency;
 
 import server.iot.pojo.RingRecord;
 
-public class KeyEventEmergencyListener extends EmergencyListener  {
+public class KeyEventEmergencyListener extends EmergencyListener {
 
     @Override
     protected boolean abnormal(RingRecord record) {
@@ -13,5 +13,5 @@ public class KeyEventEmergencyListener extends EmergencyListener  {
     protected EmergencyEvent newEmergency(RingRecord record) {
         return new EmergencyEvent(EmergencyType.KEYEVENT, record);
     }
-    
+
 }

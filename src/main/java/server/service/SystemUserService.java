@@ -9,7 +9,7 @@ import server.entity.SystemUser;
 import java.util.List;
 
 /**
- * @author  quyuxi
+ * @author quyuxi
  * @since 2020/5/20
  */
 @Service

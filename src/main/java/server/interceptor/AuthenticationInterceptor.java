@@ -18,7 +18,7 @@ import static server.constant.LoginConstant.TOKEN_INVALID;
 
 
 /**
- * @author  quyuxi
+ * @author quyuxi
  * @since 2020/5/20
  */
 @Component

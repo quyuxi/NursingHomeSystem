@@ -28,9 +28,9 @@ public class Physiological implements Serializable {
     private Double temperature;
 
     /**
-     * 老人
+     * 手环id
      */
-    private String elderId;
+    private String ringId;
 
     /**
      * 最后更新时间
@@ -42,12 +42,12 @@ public class Physiological implements Serializable {
     public Physiological() {
     }
 
-    public Physiological(Integer id, String heartRate, Integer bloodPressure, Double temperature, String elderId, Date dateTime) {
+    public Physiological(Integer id, String heartRate, Integer bloodPressure, Double temperature, String ringId, Date dateTime) {
         this.id = id;
         this.heartRate = heartRate;
         this.bloodPressure = bloodPressure;
         this.temperature = temperature;
-        this.elderId = elderId;
+        this.ringId = ringId;
         this.dateTime = dateTime;
     }
 }

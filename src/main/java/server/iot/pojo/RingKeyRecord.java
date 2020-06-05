@@ -7,12 +7,15 @@ public class RingKeyRecord {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public KeyType getKeyType() {
         return keyType;
     }
+
     public void setKeyType(KeyType keyType) {
         this.keyType = keyType;
     }

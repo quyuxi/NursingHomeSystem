@@ -30,4 +30,10 @@ public interface RingDao {
     RingInfo queryLastRingInfo(String elderId);
 
     Position queryLastPosition(String elderId);
+
+
+
+    boolean updateRingInfo(RingInfo ringInfo);
+
+    String getSafeArea(int elderId);
 }

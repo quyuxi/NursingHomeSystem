@@ -4,14 +4,14 @@ import server.iot.observer.Event;
 import server.iot.pojo.RingRecord;
 
 public class EmergencyEvent implements Event {
-    private RingRecord record;
     EmergencyType type = EmergencyType.INVALID;
-    
+    private RingRecord record;
+
     public EmergencyEvent(EmergencyType type, RingRecord record) {
         this.record = record;
         this.type = type;
     }
-    
+
     public RingRecord getRecord() {
         return record;
     }

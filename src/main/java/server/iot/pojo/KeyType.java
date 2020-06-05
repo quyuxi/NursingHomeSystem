@@ -3,9 +3,9 @@ package server.iot.pojo;
 public enum KeyType {
     SOS("SOS");
     //TODO add other types
-    private String name;
+    private final String name;
 
-    private KeyType(String keyType) {
+    KeyType(String keyType) {
         this.name = keyType;
     }
 

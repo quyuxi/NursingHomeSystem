@@ -14,7 +14,7 @@ public class NursingHome implements Serializable {
     /**
      * 养老院名
      */
-    private String nursinghomename;
+    private String nursingHomeName;
 
     private static final long serialVersionUID = 1L;
 }

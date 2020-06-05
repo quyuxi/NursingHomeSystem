@@ -8,12 +8,14 @@ import server.entity.SystemUser;
 import server.service.SystemUserService;
 import server.utils.JwtUtils;
 
+import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 
 import static server.constant.LoginConstant.*;
 
 /**
- * @author  quyuxi
+ * @author quyuxi
  * @since 2020/5/20
  */
 
@@ -33,11 +35,13 @@ public class SystemUserController {
      * @return
      */
     @PostMapping("/login")
-    public String login(@RequestBody SystemUser user) {
+    public String login(@RequestBody SystemUser user, HttpServletResponse response) {
 
         SystemUser systemUser = systemUserService.findUserInfoByName(user.getUserName());
         if (systemUser.getPassword().equals(user.getPassword())) {
-            return JwtUtils.sign(user.getUserName(), user.getPassword());
+            response.setHeader("token", JwtUtils.sign(user.getUserName(), user.getPassword()));
+            return LOGIN_NOPERMISSION;
+
         }
         return LOGIN_WRONGPASSWORD;
 

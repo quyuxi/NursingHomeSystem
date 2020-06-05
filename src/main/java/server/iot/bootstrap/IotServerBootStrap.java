@@ -7,6 +7,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import server.iot.emergency.KinestateEmergencyListener;
 import server.iot.emergency.OverstepEmergencyListener;
 import server.iot.emergency.PhysicalEmergencyListener;
@@ -18,6 +20,8 @@ import server.iot.handler.RingObjDecoder;
 
 public class IotServerBootStrap {
 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IotServerBootStrap.class);
     private final int servicePort;
 
     public IotServerBootStrap() {
@@ -25,50 +29,48 @@ public class IotServerBootStrap {
     }
 
     public IotServerBootStrap(int servicePort) {
-        this.servicePort = servicePort; 
+        this.servicePort = servicePort;
     }
 
-    public void start(){
-        EventLoopGroup bossGroup=new NioEventLoopGroup(1);
-        EventLoopGroup workGroup=new NioEventLoopGroup();
-        ServerBootstrap boot=new ServerBootstrap();
+    public void start() {
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup workGroup = new NioEventLoopGroup();
+        ServerBootstrap boot = new ServerBootstrap();
         boot.group(bossGroup, workGroup)
-            .channel(NioServerSocketChannel.class)
-            .option(ChannelOption.SO_BACKLOG, 100)    //TODO 配置缓冲区大小，后续定制服务端Channel
-            .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(getChildChannelHandler());
-        
+                .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 100)    //TODO 配置缓冲区大小，后续定制服务端Channel
+                .handler(new LoggingHandler(LogLevel.INFO))
+                .childHandler(getChildChannelHandler());
+
         try {
             ChannelFuture future = boot.bind(servicePort).sync();
             startupLog();
             future.channel().closeFuture().sync();    //TODO ???
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             bossGroup.shutdownGracefully();    //TODO 作用???
             workGroup.shutdownGracefully();
         }
-        
+
     }
-    
+
     private ChannelHandler getChildChannelHandler() {
         ChannelHandler handler = new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline()
-                  .addLast(new RegroupMsgHandler())    //TODO 考虑使用Decoder
-                  .addLast(new RingObjDecoder())
-                  .addLast(getEmergencyHandler())    //TODO 考虑持久化与告警的顺序
-                  .addLast(new PersistenceHandler());
-                  //TODO 添加其他handler
+                        .addLast(new RegroupMsgHandler())    //TODO 考虑使用Decoder
+                        .addLast(new RingObjDecoder())
+                        .addLast(getEmergencyHandler())    //TODO 考虑持久化与告警的顺序
+                        .addLast(new PersistenceHandler());
+                //TODO 添加其他handler
             }
         };
-        
-       return handler;
+
+        return handler;
     }
-    
+
     private EmergencyRecognizeHandler getEmergencyHandler() {
         EmergencyRecognizeHandler handler = new EmergencyRecognizeHandler();
         handler.addListener(new OverstepEmergencyListener());
@@ -76,12 +78,11 @@ public class IotServerBootStrap {
         handler.addListener(new KinestateEmergencyListener());
         return handler;
     }
-    
-    private void startupLog()
-    {
-        System.out.println("*******************************************");
-        System.out.println("************ IoTServer started ************");
-        System.out.println("*******************************************");
+
+    private void startupLog() {
+        LOGGER.info("*******************************************");
+        LOGGER.info("************ IoTServer started ************");
+        LOGGER.info("*******************************************");
     }
-    
+
 }

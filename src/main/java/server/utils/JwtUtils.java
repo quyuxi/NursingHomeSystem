@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * @author  quyuxi
+ * @author quyuxi
  * @since 2020/5/20
  */
 public class JwtUtils {

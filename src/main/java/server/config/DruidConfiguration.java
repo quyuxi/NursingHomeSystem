@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
- * @author  quyuxi
+ * @author quyuxi
  * @since 2020/5/20
  */
 @Configuration

@@ -9,12 +9,15 @@ public class Kinestate {
     public Acceleration getAcc() {
         return acc;
     }
+
     public void setAcc(Acceleration acc) {
         this.acc = acc;
     }
+
     public Palstance getPal() {
         return pal;
     }
+
     public void setPal(Palstance pal) {
         this.pal = pal;
     }
@@ -22,7 +25,7 @@ public class Kinestate {
     @Override
     public String toString() {
         String kinestate = "{Kinestate = " + super.toString() + ", acc = " + acc.toString()
-               + ", pal = " + pal.toString() + "}";
+                + ", pal = " + pal.toString() + "}";
         return kinestate;
     }
 

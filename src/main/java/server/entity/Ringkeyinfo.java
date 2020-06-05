@@ -9,13 +9,13 @@ import lombok.Data;
  * @author 
  */
 @Data
-public class RingKeyInfo implements Serializable {
+public class Ringkeyinfo implements Serializable {
     private Integer id;
 
     /**
-     * 老人
+     * 手环id
      */
-    private String elderId;
+    private String ringId;
 
     /**
      * 最后更新时间

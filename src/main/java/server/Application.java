@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import server.iot.bootstrap.IotServerBootStrap;
+import server.utils.SpringUtils;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.concurrent.Executors;
@@ -30,7 +30,7 @@ public class Application {
                 bootStrap.start();
             }
         });
-        SpringApplication.run(Application.class, args);
+        SpringUtils.applicationContext = SpringApplication.run(Application.class, args);
     }
 
 }

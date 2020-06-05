@@ -19,12 +19,11 @@ public class RingDataCache {
     public static ConcurrentHashMap<String, RingData> cache = new ConcurrentHashMap<String, RingData>();
 
 
-
-    public static Map<String,Object> getRingDataByElderId(String elderId){
+    public static Map<String, Object> getRingDataByElderId(String elderId) {
         if (cache.contains(elderId)) {
 
             HashMap<String, Object> map = new HashMap<>();
-            RingData ringData = cache.get(elderId);;
+            RingData ringData = cache.get(elderId);
             JSONObject jsonObject = (JSONObject) JSONObject.toJSON(ringData);
             Set<String> keySet = jsonObject.keySet();
 
@@ -37,8 +36,9 @@ public class RingDataCache {
         }
         return null;
     }
-    public static void put(String elderid,RingData ringData){
-        cache.put(elderid,ringData);
+
+    public static void put(String elderId, RingData ringData) {
+        cache.put(elderId, ringData);
     }
 
 }
