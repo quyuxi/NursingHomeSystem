@@ -1,17 +1,8 @@
-package server.iot.pojo;
+package server.pojo;
 
-public class RegisterRsp {
-    private RegisterResult result;
+public class RegisterStateAck {
     private int imsi;
     private int userId;
-
-    public RegisterResult getResult() {
-        return result;
-    }
-
-    public void setResult(RegisterResult result) {
-        this.result = result;
-    }
 
     public int getImsi() {
         return imsi;

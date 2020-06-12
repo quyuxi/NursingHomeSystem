@@ -4,7 +4,7 @@ package server.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.dao.SystemUserDao;
-import server.entity.SystemUser;
+import server.pojo.SystemUser;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class SystemUserService {
     }
 
 
-    public SystemUser findUserInfoByName(String userName) {
-        return systemuserDao.findUserInfoByName(userName);
+    public SystemUser findUserInfoById(String id) {
+        return systemuserDao.findUserInfoById(id);
 
     }
 

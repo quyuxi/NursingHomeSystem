@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import server.annotation.Admin;
-import server.entity.Elder;
+
+import server.pojo.Elder;
 import server.service.ElderService;
+import server.service.RingService;
 
 import java.util.List;
 
@@ -24,10 +26,13 @@ public class ElderController {
     @Autowired
     ElderService elderService;
 
+    @Autowired
+    RingService ringService;
 
-    @GetMapping(value = "/find/{elderId}")
-    public Object getElderByID(@PathVariable("elderId") String elderId) {
-        Elder elder = elderService.selectElderById(elderId);
+
+    @GetMapping(value = "/find/{id}")
+    public Object getElderByID(@PathVariable("id") String id) {
+        Elder elder = elderService.selectElderById(id);
         if (elder == null)
             return FINDELDER_NULL;
         return elder;
@@ -51,15 +56,16 @@ public class ElderController {
     @Admin
     @PostMapping(value = "/create")
     public String createElder(@RequestBody Elder elder) {
-        if (elderService.createElder(elder))
+        if (elderService.createElder(elder) && ringService.createRingInfo(elder.getId(), elder.getJoinTime())) {
             return CREATE_SUCCESS;
+        }
         return CREATE_FAILD;
     }
 
     @Admin
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String amendElder(@RequestBody Elder elder) {
-        if (elderService.selectElderById(elder.getElderId()) == null)
+        if (elderService.selectElderById(elder.getId()) == null)
             return UPDATE_NULL;
         if (elderService.updateElder(elder))
             return UPDATE_SUCCESS;
@@ -70,7 +76,7 @@ public class ElderController {
     @Admin
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteElder(@RequestBody Elder delder) {
-        if (elderService.deleteElderById(delder.getElderId()))
+        if (elderService.deleteElderById(delder.getId()))
             return DELETE_SUCCESS;
         return DELETE_FAILD;
     }

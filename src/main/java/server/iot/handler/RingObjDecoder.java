@@ -1,13 +1,11 @@
 package server.iot.handler;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import server.iot.pojo.RingRecord;
+import server.pojo.RingRecord;
 
 import java.io.IOException;
 

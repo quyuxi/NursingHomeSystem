@@ -3,11 +3,7 @@ package server.utils;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import server.entity.Physiological;
-import server.entity.Position;
-import server.entity.Posture;
-import server.entity.RingInfo;
-import server.iot.pojo.RingRecord;
+import server.pojo.RingRecord;
 import server.service.RingService;
 
 import java.text.ParseException;
@@ -22,13 +18,14 @@ public class RingUtils {
 
         RingService ringService = SpringUtils.getBean(RingService.class);
 
-        Position position = new Position(null, String.valueOf(record.getPosition().getLat()), String.valueOf(record.getPosition().getLng()), Integer.toString(record.getId()), formatTime(record.getTime()));
-
-        Posture posture = new Posture(null, JSON.toJSONString(record.getKinestat().getAcc()), JSON.toJSONString(record.getKinestat().getPal()), Integer.toString(record.getId()), formatTime(record.getTime()));
-        Physiological physiological = new Physiological(null, String.valueOf(record.getPhysical().getHeartRate()), record.getPhysical().getBloodPressuer(), record.getPhysical().getTemperature(), Integer.toString(record.getId()), formatTime(record.getTime()));
-        RingInfo ringInfo = new RingInfo(Integer.toString(record.getId()), record.getBattery(), formatTime(record.getTime()));
-
-        boolean result = ringService.insertRingData(Integer.toString(record.getId()),position, posture, physiological, ringInfo);
+        boolean result = ringService.insertRingData(
+                record.getId(),
+                record.getPosition(),
+                record.getBattery(),
+                record.getPhysical(),
+                record.getPosition().getLat()
+                ,record.getPosition().getLng(),
+                record.getTime(),JSON.toJSONString(record.getKinestat().getAcc()),JSON.toJSONString(record.getKinestat().getPal()));
         LOG.info("插入手环数据," + result);
     }
 

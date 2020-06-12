@@ -4,12 +4,11 @@ package server.webserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.annotation.Admin;
-import server.entity.SystemUser;
+import server.pojo.SystemUser;
 import server.service.SystemUserService;
 import server.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.List;
 
 import static server.constant.LoginConstant.*;
@@ -37,9 +36,9 @@ public class SystemUserController {
     @PostMapping("/login")
     public String login(@RequestBody SystemUser user, HttpServletResponse response) {
 
-        SystemUser systemUser = systemUserService.findUserInfoByName(user.getUserName());
+        SystemUser systemUser = systemUserService.findUserInfoById(user.getId());
         if (systemUser.getPassword().equals(user.getPassword())) {
-            response.setHeader("token", JwtUtils.sign(user.getUserName(), user.getPassword()));
+            response.setHeader("token", JwtUtils.sign(user.getId(), user.getRole()));
             return LOGIN_NOPERMISSION;
 
         }
@@ -51,7 +50,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
     public Object findUserInfo(@PathVariable("name") String userName) {
-        SystemUser user = systemUserService.findUserInfoByName(userName);
+        SystemUser user = systemUserService.findUserInfoById(userName);
         if (null == user) {
             return FINDUSER_NULL;
         }
@@ -70,7 +69,7 @@ public class SystemUserController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createNewUser(@RequestBody SystemUser user) {
 
-        if (systemUserService.findUserInfoByName(user.getUserName()) != null) {
+        if (systemUserService.findUserInfoById(user.getId()) != null) {
             return CREATE__REPEATNAME;
         }
 
@@ -83,7 +82,7 @@ public class SystemUserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateUser(@RequestBody SystemUser user) {
-        if (systemUserService.findUserInfoByName(user.getUserName()) == null) {
+        if (systemUserService.findUserInfoById(user.getId()) == null) {
             return UPDATE_NULL;
         }
 

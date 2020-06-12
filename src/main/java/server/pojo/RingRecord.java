@@ -1,4 +1,4 @@
-package server.iot.pojo;
+package server.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import server.iot.tools.DateAndTime;
@@ -8,8 +8,14 @@ public class RingRecord {
     private int battery;
     private PhysicalData physical;
     private Position position;
+
+    //api json不要
     private Kinestate kinestat;
+    //json不要
+    //api json不要
     private KeyEvent keyEvent;
+
+
     @JsonIgnore
     private String time;
 

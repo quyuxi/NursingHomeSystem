@@ -1,7 +1,8 @@
-package server.iot.pojo;
+package server.pojo;
 
 //TODO 确认数据内容
 public class Kinestate {
+
 
     private Acceleration acc;
     private Palstance pal;

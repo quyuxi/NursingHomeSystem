@@ -1,4 +1,4 @@
-package server.iot.pojo;
+package server.pojo;
 
 public enum KeyEvent {
     NON(0), SOS(1);

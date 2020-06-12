@@ -1,6 +1,6 @@
 package server.iot.tools;
 
-import server.iot.pojo.Position;
+import server.pojo.Position;
 
 public class PositionJudge {
     private final Position position;

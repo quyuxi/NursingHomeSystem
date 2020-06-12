@@ -1,7 +1,8 @@
 package server.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import server.entity.SystemUser;
+import server.pojo.SystemUser;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ import java.util.List;
 public interface SystemUserDao {
 
 
-    SystemUser findUserInfoByName(String userName);
+    SystemUser findUserInfoById(@Param("id") String id);
 
-    String queryRole(String userName);
+    String queryRole(@Param("id") String id);
 
     List<SystemUser> findAllUsers();
 
@@ -21,5 +22,7 @@ public interface SystemUserDao {
 
     boolean updateUserPassword(SystemUser user);
 
-    boolean deleteSystemUserByUserName(String userName);
+    boolean deleteSystemUserByUserName(@Param("id") String id);
+
+
 }

@@ -1,7 +1,7 @@
 package server.iot.emergency;
 
-import server.iot.pojo.PhysicalData;
-import server.iot.pojo.RingRecord;
+import server.pojo.PhysicalData;
+import server.pojo.RingRecord;
 
 public class PhysicalEmergencyListener extends EmergencyListener {
 

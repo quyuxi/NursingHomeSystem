@@ -1,6 +1,6 @@
 package server.iot.emergency;
 
-import server.iot.pojo.RingRecord;
+import server.pojo.RingRecord;
 
 public class KinestateEmergencyListener extends EmergencyListener {
 

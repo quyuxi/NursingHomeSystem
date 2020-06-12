@@ -3,7 +3,8 @@ package server.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.dao.ElderDao;
-import server.entity.Elder;
+import server.pojo.Elder;
+
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class ElderService {
     @Autowired
     ElderDao elderDao;
 
-    public Elder selectElderById(String elderId) {
-        return elderDao.selectElderById(elderId);
+    public Elder selectElderById(String id) {
+        return elderDao.selectElderById(id);
     }
 
     public List<Elder> selectElderList() {
@@ -26,7 +27,8 @@ public class ElderService {
     }
 
     public String getNewID() {
-        return "";
+        int id = elderDao.selectLastId();
+        return Integer.toString(id + 1);
     }
 
     public boolean createElder(Elder elder) {

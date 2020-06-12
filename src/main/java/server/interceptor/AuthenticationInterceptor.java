@@ -1,14 +1,11 @@
 package server.interceptor;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import server.annotation.Admin;
 import server.constant.Constant;
-import server.service.SystemUserService;
 import server.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +21,15 @@ import static server.constant.LoginConstant.TOKEN_INVALID;
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    SystemUserService systemUserService;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //验证token
         if (!hasPermission(request)) {
-            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), TOKEN_INVALID);
+            response.setStatus(403);
+            response.getWriter().print(TOKEN_INVALID);
             return false;
         }
 
@@ -41,7 +38,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         // 如果没有权限，返回异常
-        response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "NOPERMISSION");
+        response.setStatus(403);
+        response.getWriter().print("NOPERMISSION");
         return false;
     }
 
@@ -74,9 +72,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
             // 如果加了@Admin注解，比如用户有admin权限
             String token = request.getHeader("token");
-            String userName = JwtUtils.verity(token);
-            String role = systemUserService.queryRole(userName);
-            return Constant.ADMIN.equals(role);
+            return Constant.ADMIN.equals(JwtUtils.verity(token));
         }
         return true;
     }

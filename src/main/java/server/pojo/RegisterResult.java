@@ -1,4 +1,4 @@
-package server.iot.pojo;
+package server.pojo;
 
 public enum RegisterResult {
     SUCCESS(0), FAILD_NULL(1), FAILD_REPEATED(2);

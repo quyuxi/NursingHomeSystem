@@ -1,7 +1,7 @@
 package server.dao;
 
 
-import server.entity.NursingHome;
+import server.pojo.NursingHome;
 
 public interface NursingHomeDao {
     int deleteByPrimaryKey(Integer id);

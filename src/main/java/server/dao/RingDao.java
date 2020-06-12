@@ -1,11 +1,14 @@
 package server.dao;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import server.entity.Physiological;
-import server.entity.Position;
-import server.entity.Posture;
-import server.entity.RingInfo;
+import server.pojo.Acceleration;
+import server.pojo.Palstance;
+import server.pojo.PhysicalData;
+import server.pojo.Position;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,27 +16,29 @@ import java.util.Map;
 public interface RingDao {
 
 
-    boolean insertPosition(Position position);
+    boolean insertPosition(@Param("lat")double lat,@Param("lng")double lng,@Param("ringId") int ringId,@Param("dateTime") String dateTime);
 
-    boolean insertPosture(Posture posture);
-
-    boolean insertPhysiological(Physiological physiological);
-
-    boolean insertRingInfo(RingInfo ringInfo);
-
-    List<Map<String, String>> queryDataByTime(String elderId, String startTime, String endTime);
-
-    Posture queryLastPosture(String elderId);
-
-    Physiological queryLastPhysiological(String elderId);
-
-    RingInfo queryLastRingInfo(String elderId);
-
-    Position queryLastPosition(String elderId);
+    boolean insertPosture(@Param("acceleration")String acceleration,@Param("palstance" )String palstance,@Param("ringId") int ringId,@Param("dateTime") String dateTime);
 
 
+    boolean insertPhysiological(@Param("heartRate")int heartRate,@Param("bloodPressuer" )int bloodPressuer,@Param("temperature") double temperature,@Param("ringId") int ringId,@Param("dateTime") String dateTime);
 
-    boolean updateRingInfo(RingInfo ringInfo);
+    boolean insertRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
 
-    String getSafeArea(int elderId);
+    List<Map<String, String>> queryDataByTime(@Param("ringId") int ringId, String startTime, String endTime);
+
+    Map<String,Object> queryLastPosture(@Param("ringId")int ringId);
+
+    PhysicalData queryLastPhysiological(@Param("ringId")int ringId);
+
+    Map<String,Object>  queryLastRingInfo(@Param("ringId")int ringId);
+
+    Position queryLastPosition(@Param("ringId")int ringId);
+
+
+    boolean updateRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
+
+    String getSafeArea(int id);
+
+    boolean createRingInfo(@Param("ringId") int ringId,@Param("battery") String battery,@Param("dateTime") String dateTime);
 }

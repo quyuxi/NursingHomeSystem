@@ -1,4 +1,4 @@
-package server.iot.pojo;
+package server.pojo;
 
 import server.iot.observer.Event;
 

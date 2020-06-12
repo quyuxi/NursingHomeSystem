@@ -1,4 +1,4 @@
-package server.iot.pojo;
+package server.pojo;
 
 public class RingKeyRecord {
     private int id;

@@ -32,10 +32,10 @@ public class JwtUtils {
      * 生成签名
      *
      * @param username
-     * @param password
+     * @param role
      * @return
      */
-    public static String sign(String username, String password) {
+    public static String sign(String username, String role) {
         //过期时间
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         //私钥及加密算法
@@ -46,7 +46,7 @@ public class JwtUtils {
         header.put("alg", "HS256");
         //附带username和userID生成签名
         return JWT.create().withHeader(header).withClaim("loginName", username)
-                .withClaim("password", password).withExpiresAt(date).sign(algorithm);
+                .withClaim("role", role).withExpiresAt(date).sign(algorithm);
     }
 
     /**
@@ -60,7 +60,7 @@ public class JwtUtils {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
-            return jwt.getClaim("loginName").asString();
+            return jwt.getClaim("role").asString();
         } catch (IllegalArgumentException | JWTVerificationException e) {
             LOGGER.error("鉴权失败,token无效");
             return null;

@@ -1,6 +1,6 @@
 package server.dao;
 
-import server.entity.Relatives;
+import server.pojo.Relatives;
 
 public interface RelativesDao {
     int deleteByPrimaryKey(Integer id);

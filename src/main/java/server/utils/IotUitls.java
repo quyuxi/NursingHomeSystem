@@ -1,9 +1,6 @@
 package server.utils;
 
-import server.iot.pojo.Position;
-import server.service.RingService;
-
-import java.util.List;
+import server.pojo.Position;
 
 public class IotUitls {
 

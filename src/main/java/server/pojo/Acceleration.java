@@ -1,7 +1,10 @@
-package server.iot.pojo;
+package server.pojo;
 
-public class Palstance {
 
+/**
+ *
+ */
+public class Acceleration {
     private double x;
     private double y;
     private double z;
@@ -32,7 +35,7 @@ public class Palstance {
 
     @Override
     public String toString() {
-        return "Palstance [x=" + x + ", y=" + y + ", z=" + z + "]";
+        return "Acceleration [x=" + x + ", y=" + y + ", z=" + z + "]";
     }
 
 }

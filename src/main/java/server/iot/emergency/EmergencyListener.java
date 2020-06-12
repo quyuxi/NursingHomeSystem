@@ -2,8 +2,8 @@ package server.iot.emergency;
 
 import server.iot.observer.Event;
 import server.iot.observer.EventListener;
-import server.iot.pojo.RingRecord;
-import server.iot.pojo.RingRecordAdaptor;
+import server.pojo.RingRecord;
+import server.pojo.RingRecordAdaptor;
 
 public abstract class EmergencyListener implements EventListener {
 
