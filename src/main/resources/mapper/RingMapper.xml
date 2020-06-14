@@ -63,7 +63,7 @@
     <select id="getSafeArea" resultType="java.lang.String">
         select area
         from Elder
-        where id = #{id}
+        where id = #{ringId}
     </select>
 
 

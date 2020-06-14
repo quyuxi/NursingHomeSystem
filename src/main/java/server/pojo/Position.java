@@ -14,6 +14,10 @@ public class Position {
     public Position() {
     }
 
+    public Position(double lng, double lat) {
+        this.lng = lng;
+        this.lat = lat;
+    }
 
     @Override
     public String toString() {

@@ -78,16 +78,16 @@ public class RingService {
 
     public List<server.pojo.Position> getSafeArea(int id) {
         JSONArray array = JSON.parseArray(ringDao.getSafeArea(id));
-        ArrayList<server.pojo.Position> positions = new ArrayList<>();
+        ArrayList<Position> positions = new ArrayList<>();
         for (int i = 0; i < array.size(); i++) {
             JSONObject tmp = array.getJSONObject(i);
-            positions.add(new server.pojo.Position(tmp.getDouble("lng"), tmp.getDouble("lat")));
+            positions.add(new Position(tmp.getDouble("lng"), tmp.getDouble("lat")));
 
         }
         return positions;
     }
 
-    public boolean createRingInfo(String ringId, String startTime) {
-        return ringDao.createRingInfo(ringId, startTime);
+    public boolean createRingInfo(int ringId, String startTime) {
+        return ringDao.createRingInfo(ringId, 100,startTime);
     }
 }

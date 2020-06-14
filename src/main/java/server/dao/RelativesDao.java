@@ -1,17 +1,18 @@
 package server.dao;
 
-import server.pojo.Relatives;
+
+import server.pojo.Relative;
 
 public interface RelativesDao {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Relatives record);
+    int insert(Relative record);
 
-    int insertSelective(Relatives record);
+    int insertSelective(Relative record);
 
-    Relatives selectByPrimaryKey(Integer id);
+    Relative selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Relatives record);
+    int updateByPrimaryKeySelective(Relative record);
 
-    int updateByPrimaryKey(Relatives record);
+    int updateByPrimaryKey(Relative record);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public interface ElderDao {
 
-    Elder selectElderById(@Param("id") String id);
+    Elder selectElderById(@Param("id") int id);
 
     List<Elder> selectElderList();
 
@@ -17,7 +17,7 @@ public interface ElderDao {
 
     boolean updateElder(Elder elder);
 
-    boolean deleteElderById(@Param("id") String id);
+    boolean deleteElderById(@Param("id") int id);
 
 
     int selectLastId();

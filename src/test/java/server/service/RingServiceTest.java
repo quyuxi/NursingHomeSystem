@@ -27,11 +27,11 @@ public class RingServiceTest {
 
     }
 
-    @Test
-    public void quertByTime() throws InterruptedException {
-        List<Map<String, String>> maps = ringService.queryDataByTime(elerid, "2020-05-30 11:35:34", "2020-05-30 11:54:12");
-//        LOG.info.println(JSON.toJSONString(maps,true));
-
-    }
+//    @Test
+//    public void quertByTime() throws InterruptedException {
+//        List<Map<String, String>> maps = ringService.queryDataByTime(elerid, "2020-05-30 11:35:34", "2020-05-30 11:54:12");
+////        LOG.info.println(JSON.toJSONString(maps,true));
+//
+//    }
 
 }

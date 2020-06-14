@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Elder {
 
-    private String id;
+    private int id;
     private String name;
     private String sex;
     private String idCard;

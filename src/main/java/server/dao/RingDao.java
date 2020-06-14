@@ -38,7 +38,7 @@ public interface RingDao {
 
     boolean updateRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
 
-    String getSafeArea(int id);
+    String getSafeArea(@Param("ringId") int ringId);
 
-    boolean createRingInfo(@Param("ringId") int ringId,@Param("battery") String battery,@Param("dateTime") String dateTime);
+    boolean createRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
 }

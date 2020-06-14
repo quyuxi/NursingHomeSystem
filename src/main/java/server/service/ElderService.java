@@ -18,7 +18,7 @@ public class ElderService {
     @Autowired
     ElderDao elderDao;
 
-    public Elder selectElderById(String id) {
+    public Elder selectElderById(int id) {
         return elderDao.selectElderById(id);
     }
 
@@ -39,7 +39,7 @@ public class ElderService {
         return elderDao.updateElder(elder);
     }
 
-    public boolean deleteElderById(String id) {
+    public boolean deleteElderById(int id) {
         return elderDao.deleteElderById(id);
     }
 

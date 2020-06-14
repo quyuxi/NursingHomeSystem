@@ -33,7 +33,7 @@ public class EmergencyCache {
 
     //TODO 线程同步
     public void cacheEvent(EmergencyEvent e) {
-        int nursingHomeId = e.getElderId() / 10000;
+        int nursingHomeId = e.getRecord().getId() / 10000;
         List<EmergencyEvent> events = eventsMap.get(nursingHomeId);
         if (events == null) {
             events = new LinkedList<EmergencyEvent>();
