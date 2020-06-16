@@ -10,20 +10,23 @@
         <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
         <result column="date" jdbcType="VARCHAR" property="joinTime"/>
         <result column="area" jdbcType="VARCHAR" property="area"/>
+        <association property="relatives" javaType="server.pojo.Relative"/>
+
     </resultMap>
 
 
-    <select id="selectElderById" resultType="server.pojo.Elder">
+    <select id="selectElderById" resultMap="BaseResultMap">
 
-        SELECT *
-        FROM Elder
-        WHERE id = #{id}
+        SELECT e.*,r.*
+        FROM Elder as e,Relatives as r
+        where e.id = #{id} and r.elderId=#{id}
 
     </select>
 
-    <select id="selectElderList" resultType="server.pojo.Elder">
-        SELECT *
-        FROM Elder
+    <select id="selectElderList" resultMap="BaseResultMap">
+        SELECT e.*,r.*
+        FROM Elder as e,Relatives as r
+        where e.id = r.elderId
     </select>
     <select id="selectLastId" resultType="java.lang.Integer">
         select id
