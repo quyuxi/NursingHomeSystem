@@ -170,8 +170,8 @@ SET foreign_key_checks = 0;
 -- ----------------------------
 -- Table structure for Relatives
 -- ----------------------------
-DROP TABLE IF EXISTS `Relatives`;
-CREATE TABLE `Relatives`
+DROP TABLE IF EXISTS `Relative`;
+CREATE TABLE `Relative`
 (
     `id`       int(50)      NOT NULL AUTO_INCREMENT,
     `name`     varchar(50)  NOT NULL,

@@ -7,6 +7,7 @@ import server.annotation.Admin;
 
 import server.pojo.Elder;
 import server.service.ElderService;
+import server.service.RelativeService;
 import server.service.RingService;
 
 import java.util.List;
@@ -28,7 +29,8 @@ public class ElderController {
 
     @Autowired
     RingService ringService;
-
+    @Autowired
+    RelativeService relativeService;
 
     @GetMapping(value = "/find/{id}")
     public Object getElderByID(@PathVariable("id") int id) {
@@ -56,7 +58,9 @@ public class ElderController {
     @Admin
     @PostMapping(value = "/create")
     public String createElder(@RequestBody Elder elder) {
-        if (elderService.createElder(elder) && ringService.createRingInfo(elder.getId(), elder.getJoinTime())) {
+        if (elderService.createElder(elder)
+                && ringService.createRingInfo(elder.getId(), elder.getJoinTime())
+                &&relativeService.create(elder.getRelatives())) {
             return CREATE_SUCCESS;
         }
         return CREATE_FAILD;

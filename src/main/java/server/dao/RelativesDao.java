@@ -1,18 +1,20 @@
 package server.dao;
 
 
+import org.springframework.stereotype.Component;
 import server.pojo.Relative;
 
+@Component
 public interface RelativesDao {
-    int deleteByPrimaryKey(Integer id);
+    boolean deleteByPrimaryKey(Integer id);
 
-    int insert(Relative record);
+    boolean insert(Relative relative);
 
-    int insertSelective(Relative record);
+    boolean insertSelective(Relative relative);
 
     Relative selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Relative record);
+    boolean updateByPrimaryKeySelective(Relative relative);
 
-    int updateByPrimaryKey(Relative record);
+    boolean updateByPrimaryKey(Relative relative);
 }

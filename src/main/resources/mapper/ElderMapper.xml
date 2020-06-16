@@ -49,6 +49,7 @@
                            birthday, phone, area,
                            joinTime)
         values (#{id},#{name},#{sex},#{idCard},#{birthday},#{phone},#{area},#{joinTime})
+
     </insert>
 
 
