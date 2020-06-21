@@ -30,27 +30,32 @@ public class SystemUserController {
     /**
      * 登录成功返回token
      *
-     * @param user
+     * @param id 用户id
+     * @param password 用户id
      * @return
      */
     @PostMapping("/login")
-    public String login(@RequestBody SystemUser user, HttpServletResponse response) {
+    public String login(@RequestParam String id,@RequestParam String password, HttpServletResponse response) {
 
-        SystemUser systemUser = systemUserService.findUserInfoById(user.getId());
-        if (systemUser.getPassword().equals(user.getPassword())) {
-            response.setHeader("token", JwtUtils.sign(user.getId(), user.getRole()));
+        SystemUser systemUser = systemUserService.findUserInfoById(id);
+        if(null ==systemUser){
             return LOGIN_NOPERMISSION;
-
         }
-        return LOGIN_WRONGPASSWORD;
+        if (systemUser.getPassword().equals(password)) {
+            response.setHeader("token", JwtUtils.sign(id, systemUser.getRole()));
+            return systemUser.getRole().equals("admin")?LOGIN_ADMINSTRATOR:LOGIN_USERPERMIT;
+
+        }else{
+            return LOGIN_WRONGPASSWORD;
+        }
 
     }
 
 
     @Admin
-    @RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
-    public Object findUserInfo(@PathVariable("name") String userName) {
-        SystemUser user = systemUserService.findUserInfoById(userName);
+    @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
+    public Object findUserInfo(@PathVariable("id") String id) {
+        SystemUser user = systemUserService.findUserInfoById(id);
         if (null == user) {
             return FINDUSER_NULL;
         }
@@ -102,9 +107,9 @@ public class SystemUserController {
 
 
     @Admin
-    @RequestMapping(value = "/delete/{deleteName}", method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("deleteName") String name) {
-        if (systemUserService.deleteSystemUserByUserName(name))
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") String id) {
+        if (systemUserService.deleteSystemUserById(id))
             return DELETE_SUCCESS;
         return DELETE_FAILD;
     }

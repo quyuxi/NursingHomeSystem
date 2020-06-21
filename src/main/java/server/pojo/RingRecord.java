@@ -1,5 +1,6 @@
 package server.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import server.iot.tools.DateAndTime;
 
@@ -10,9 +11,11 @@ public class RingRecord {
     private Position position;
 
     //api json不要
+    @JSONField(serialize = false)
     private Kinestate kinestat;
     //json不要
     //api json不要
+    @JSONField(serialize = false)
     private KeyEvent keyEvent;
 
 
@@ -79,15 +82,5 @@ public class RingRecord {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        String record = "{RingRecord:" + super.toString()
-                + ", id = " + id + ", battery = " + battery
-                + ", physical = " + physical.toString()
-                + ", position = " + position.toString()
-                + ", kinestat = " + kinestat.toString()
-                + ", keyEvent = " + keyEvent.toString()
-                + ", time = " + time + "}";
-        return record;
-    }
+
 }

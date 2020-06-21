@@ -3,7 +3,7 @@
 <mapper namespace="server.dao.NursingHomeDao">
     <resultMap id="BaseResultMap" type="server.pojo.NursingHome">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="NursingHomeName" jdbcType="VARCHAR" property="nursinghomename"/>
+        <result column="NursingHomeName" jdbcType="VARCHAR" property="nursingHomeName"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, NursingHomeName

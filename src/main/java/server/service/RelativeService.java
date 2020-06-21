@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 import server.dao.RelativesDao;
 import server.pojo.Relative;
 
+import java.util.List;
+
 @Service
 public class RelativeService {
 
     @Autowired
     RelativesDao relativesDao;
 
-    public boolean create(Relative[] relatives) {
+    public boolean create(List<Relative> relatives) {
 
         for (Relative relative : relatives) {
             boolean res = relativesDao.insert(relative);
@@ -21,5 +23,10 @@ public class RelativeService {
             return res;
         }
         return true;
+    }
+
+
+    public boolean deleteByElderId(int id) {
+        return relativesDao.deleteByElderId(id);
     }
 }

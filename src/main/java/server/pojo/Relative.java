@@ -22,7 +22,7 @@ public class Relative implements Serializable {
     /**
      * 出生日期
      */
-    private Date birthday;
+    private String birthday;
     /**
      * 手机号
      */

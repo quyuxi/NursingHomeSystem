@@ -1,6 +1,8 @@
 package server.webserver;
 
 
+import com.alibaba.fastjson.JSON;
+import io.github.yedaxia.apidocs.ApiDoc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +27,21 @@ public class RingController {
     @Autowired
     RingService ringService;
 
+    @ApiDoc(result =  List.class)
     @RequestMapping(value = "/queryRingDataByTime/{id}/{startTime}/{endTime}", method = RequestMethod.GET)
-    public List<Map<String, String>> quertDataByTime(int id, String startTime, String endTime) {
+    public List<RingRecord> quertDataByTime(int id, String startTime, String endTime) {
         LOGGER.info("查询手环数据，开始时间：{}，结束时间{}，老人id：{}", startTime, endTime, id);
         return ringService.queryDataByTime(id, startTime, endTime);
     }
 
     @GetMapping("/queryLastRingData/{id}")
-    public RingRecord queryLastRingData(int id) {
+    public String queryLastRingData(int id) {
         LOGGER.info("查询最新手环数据，老人id：{}", id);
         RingRecord ringRecord = CACHE.get(id);
         if (null == ringRecord)
-            return ringService.queryLastRingData(id);
-        return ringRecord;
+            ringRecord =  ringService.queryLastRingData(id);
+
+        return JSON.toJSONString(ringRecord);
 
 
     }

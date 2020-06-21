@@ -2,6 +2,8 @@ package server.pojo;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Elder
  *
@@ -18,6 +20,6 @@ public class Elder {
     private String phone;
     private String area;
     private String joinTime;
-    private Relative[] relatives;
+    private List<Relative> relatives;
 
 }

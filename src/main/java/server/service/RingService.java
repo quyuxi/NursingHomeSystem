@@ -50,26 +50,44 @@ public class RingService {
     }
 
 
-    public List<Map<String, String>> queryDataByTime(int id, String startTime, String endTime) {
-        return ringDao.queryDataByTime(id, startTime, endTime);
+    public List<RingRecord> queryDataByTime(int id, String startTime, String endTime) {
+        List<Map<String, Object>> lst = ringDao.queryDataByTime(id, startTime, endTime);
+
+
+        List<RingRecord> ringRecords = new ArrayList<>();
+        for (Map<String, Object> map : lst) {
+            RingRecord ringRecord = new RingRecord();
+            ringRecord.setTime(map.get("time").toString());
+            ringRecord.setId(Integer.parseInt(map.get("ring_id").toString()));
+            ringRecord.setPosition(new Position(Double.parseDouble(map.get("lng").toString()),Double.parseDouble(map.get("lat").toString())));
+            ringRecord.setPhysical(new PhysicalData(
+                    Integer.parseInt(map.get("heartRate").toString()),
+                    Integer.parseInt(map.get("bloodPressuer").toString()),
+                    Double.parseDouble(map.get("temperature").toString())
+            ));
+            ringRecord.setBattery(Integer.parseInt(map.get("battery").toString()));
+            ringRecords.add(ringRecord);
+        }
+
+        return ringRecords;
     }
 
 
     public RingRecord queryLastRingData(int ringId) {
 
-        Map<String, Object> posture = ringDao.queryLastPosture(ringId);
+//        Map<String, Object> posture = ringDao.queryLastPosture(ringId);
         PhysicalData physiological = ringDao.queryLastPhysiological(ringId);
         Map<String, Object> ringInfo = ringDao.queryLastRingInfo(ringId);
         Position position = ringDao.queryLastPosition(ringId);
 
-        HashMap<String, Object> map = new HashMap<>();
+
         RingRecord ringRecord = new RingRecord();
 
         ringRecord.setId(ringId);
         ringRecord.setBattery(Integer.parseInt(ringInfo.get("battery").toString()));
         ringRecord.setPhysical(physiological);
         ringRecord.setPosition(position);
-
+        ringRecord.setTime(ringInfo.get("date_time").toString());
 
         return ringRecord;
 
@@ -89,5 +107,9 @@ public class RingService {
 
     public boolean createRingInfo(int ringId, String startTime) {
         return ringDao.createRingInfo(ringId, 100,startTime);
+    }
+
+    public boolean deleteByElderId(int id) {
+        return ringDao.deleteByElderId(id);
     }
 }

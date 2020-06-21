@@ -25,4 +25,5 @@ public interface SystemUserDao {
     boolean deleteSystemUserByUserName(@Param("id") String id);
 
 
+    boolean deleteSystemUserById(String id);
 }

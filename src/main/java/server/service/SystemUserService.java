@@ -45,7 +45,9 @@ public class SystemUserService {
         return systemuserDao.updateUserPassword(user);
     }
 
-    public boolean deleteSystemUserByUserName(String name) {
-        return systemuserDao.deleteSystemUserByUserName(name);
+
+
+    public boolean deleteSystemUserById(String id) {
+        return systemuserDao.deleteSystemUserById(id);
     }
 }

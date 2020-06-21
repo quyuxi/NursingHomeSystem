@@ -13,13 +13,13 @@
     </resultMap>
 
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByElderId" parameterType="java.lang.Integer">
         delete
-        from Relatives
-        where id = #{id,jdbcType=INTEGER}
+        from Relative
+        where elderId = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="server.pojo.Relative" useGeneratedKeys="true">
-        insert into Relatives (`name`, sex, birthday,
+        insert into Relative (`name`, sex, birthday,
                                phone, idCard, address,
                                elderId)
         values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
@@ -28,7 +28,7 @@
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="server.pojo.Relative"
             useGeneratedKeys="true">
-        insert into Relatives
+        insert into Relative
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
                 `name`,
@@ -77,7 +77,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="server.pojo.Relative">
-        update Relatives
+        update Relative
         <set>
             <if test="name != null">
                 `name` = #{name,jdbcType=VARCHAR},
@@ -104,7 +104,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="server.pojo.Relative">
-        update Relatives
+        update Relative
         set `name`   = #{name,jdbcType=VARCHAR},
             sex      = #{sex,jdbcType=VARCHAR},
             birthday = #{birthday,jdbcType=DATE},

@@ -10,6 +10,15 @@ public class PhysicalData {
     private int bloodPressuer;
     private double temperature;
 
+    public PhysicalData(int heartRate, int bloodPressuer, double temperature) {
+
+        this.heartRate = heartRate;
+        this.bloodPressuer = bloodPressuer;
+        this.temperature = temperature;
+    }
+
+    public PhysicalData() {
+    }
 
     @Override
     public String toString() {

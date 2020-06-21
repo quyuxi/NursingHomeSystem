@@ -18,6 +18,12 @@ public class ElderService {
     @Autowired
     ElderDao elderDao;
 
+    @Autowired
+    RelativeService relativeService;
+
+    @Autowired
+    RingService ringService;
+
     public Elder selectElderById(int id) {
         return elderDao.selectElderById(id);
     }
@@ -40,7 +46,9 @@ public class ElderService {
     }
 
     public boolean deleteElderById(int id) {
-        return elderDao.deleteElderById(id);
+        return relativeService.deleteByElderId(id)
+                && ringService.deleteByElderId(id)
+                &&elderDao.deleteElderById(id);
     }
 
 

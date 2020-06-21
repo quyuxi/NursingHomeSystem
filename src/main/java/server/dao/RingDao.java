@@ -3,10 +3,7 @@ package server.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import server.pojo.Acceleration;
-import server.pojo.Palstance;
-import server.pojo.PhysicalData;
-import server.pojo.Position;
+import server.pojo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +22,7 @@ public interface RingDao {
 
     boolean insertRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
 
-    List<Map<String, String>> queryDataByTime(@Param("ringId") int ringId, String startTime, String endTime);
+    List<Map<String,Object>> queryDataByTime(@Param("ringId") int ringId, String startTime, String endTime);
 
     Map<String,Object> queryLastPosture(@Param("ringId")int ringId);
 
@@ -41,4 +38,6 @@ public interface RingDao {
     String getSafeArea(@Param("ringId") int ringId);
 
     boolean createRingInfo(@Param("ringId") int ringId,@Param("battery") int battery,@Param("dateTime") String dateTime);
+
+    boolean deleteByElderId(int id);
 }

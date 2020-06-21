@@ -17,6 +17,9 @@
         FROM SystemUser
         WHERE id = #{id}
     </delete>
+    <delete id="deleteSystemUserById">
+        delete from SystemUser where id=#{id}
+    </delete>
 
 
     <select id="findUserInfoById" resultType="server.pojo.SystemUser" parameterType="java.lang.String">

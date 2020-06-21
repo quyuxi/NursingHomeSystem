@@ -2,32 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="server.dao.RingDao">
 
+    <resultMap id="ringRecordMap" type="server.pojo.RingRecord" autoMapping="true">
+        <id column="ring_id" property="id"/>
+        <result column="battery" property="battery"/>
+        <result column="time" property="time"/>
+        <association property="physical" javaType="server.pojo.PhysicalData" >
+            <result column="heartRate" property="heartRate"/>
+            <result column="bloodPressuer" property="bloodPressuer"/>
+            <result column="temperature" property="temperature"/>
+        </association>
+        <association property="position" javaType="server.pojo.Position" >
+            <result column="lng" property="lng"/>
+            <result column="lat" property="lat"/>
+        </association>
+
+
+    </resultMap>
 
     <update id="updateRingInfo">
 
         update RingInfo
         set battery=#{battery}
-        and date_time=#{dateTime}
+        , date_time=#{dateTime}
         where ring_id = #{ringId}
 
     </update>
+    <delete id="deleteByElderId">
+        delete from RingInfo where ring_id=#{id}
+    </delete>
 
 
-    <select id="queryDataByTime" resultType="java.util.Map">
+    <select id="queryDataByTime" resultType="java.util.Map" >
 
-        SELECT *
+        SELECT
+        t1.ring_id as ring_id,
+        t3.battery as battery,
+        t2.heartRate as heartRate,
+        t2.bloodPressuer as bloodPressuer,
+        t2.temperature as temperature,
+        t1.lng as lng,
+        t1.lat as lat,
+        t1.date_time as time
+        FROM Position as t1
+        left join PhysicalData as t2 on t1.date_time=t2.date_time
 
-        FROM Position as t1,
-             Posture as t2,
-             PhysicalData as t3,
-             RingInfo as t4
+        left join  RingInfo as t3 on t2.ring_id = t3.ring_id
 
-        WHERE t1.date_time = t2.date_time
-          and t2.date_time = t3.date_time
-          and t3.date_time = t4.date_time
-          and t1.date_time &gt; #{startTime}
-          and t1.date_time &lt; #{endTime}
-          and t1.ring_id=#{ringId}
+        where t1.ring_id=#{ringId} and t1.date_time &gt; #{startTime} and t1.date_time &lt; #{endTime}
+
+
 
 
     </select>

@@ -2,31 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="server.dao.ElderDao">
     <resultMap id="BaseResultMap" type="server.pojo.Elder">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="sex" jdbcType="VARCHAR" property="sex"/>
-        <result column="birthday" jdbcType="DATE" property="birthday"/>
-        <result column="phone" jdbcType="VARCHAR" property="phone"/>
-        <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
-        <result column="date" jdbcType="VARCHAR" property="joinTime"/>
-        <result column="area" jdbcType="VARCHAR" property="area"/>
-        <association property="relatives" javaType="server.pojo.Relative"/>
+        <id column="eid" jdbcType="INTEGER" property="id"/>
+        <result column="ename" jdbcType="VARCHAR" property="name"/>
+        <result column="esex" jdbcType="VARCHAR" property="sex"/>
+        <result column="ebirthday" jdbcType="DATE" property="birthday"/>
+        <result column="ephone" jdbcType="VARCHAR" property="phone"/>
+        <result column="eidCard" jdbcType="VARCHAR" property="idCard"/>
+        <result column="ejoinTime" jdbcType="VARCHAR" property="joinTime"/>
+        <result column="earea" jdbcType="VARCHAR" property="area"/>
+        <collection  property="relatives" ofType="server.pojo.Relative">
+
+            <id column="id" property="id"/>
+            <result column="sex" property="sex"/>
+            <result column="birthday" property="birthday"/>
+            <result column="phone" property="phone"/>
+            <result column="idCard" property="idCard"/>
+            <result column="address" property="address"/>
+            <result column="elderId" property="elderId"/>
+        </collection >
 
     </resultMap>
 
 
     <select id="selectElderById" resultMap="BaseResultMap">
 
-        SELECT e.*,r.*
-        FROM Elder as e,Relatives as r
-        where e.id = #{id} and r.elderId=#{id}
+        SELECT e.id as eid,
+               e.name as ename,
+               e.sex as esex,
+               e.birthday as ebirthday,
+               e.idCard as eidCard,
+               e.phone as ephone,
+               e.area as earea,
+               e.joinTime as ejoinTime,
+               r.id,r.name,r.sex,r.birthday,r.phone,r.idCard,r.address,r.elderId
+        FROM Elder as e left join  Relative as r
+        on e.id=r.elderId
+        where e.id=#{id}
 
     </select>
 
     <select id="selectElderList" resultMap="BaseResultMap">
-        SELECT e.*,r.*
-        FROM Elder as e,Relatives as r
-        where e.id = r.elderId
+        SELECT e.id as eid,
+               e.name as ename,
+               e.sex as esex,
+               e.birthday as ebirthday,
+               e.idCard as eidCard,
+               e.phone as ephone,
+               e.area as earea,
+               e.joinTime as ejoinTime,
+               r.id,r.name,r.sex,r.birthday,r.phone,r.idCard,r.address,r.elderId
+        FROM Elder as e left join  Relative as r
+                                   on e.id=r.elderId
     </select>
     <select id="selectLastId" resultType="java.lang.Integer">
         select id
@@ -36,11 +62,8 @@
     </select>
 
 
-    <delete id="deleteElderById" parameterType="string">
-        delete
-        from Elder
-        where id = #{id}
-
+    <delete id="deleteElderById" parameterType="int">
+        delete from Elder where id = #{id}
     </delete>
 
     <insert id="createElder" keyColumn="id" keyProperty="id" parameterType="server.pojo.Elder"

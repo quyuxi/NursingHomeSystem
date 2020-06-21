@@ -78,9 +78,9 @@ public class ElderController {
 
 
     @Admin
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deleteElder(@RequestBody Elder delder) {
-        if (elderService.deleteElderById(delder.getId()))
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String deleteElder(@PathVariable("id") int id) {
+        if (elderService.deleteElderById(id))
             return DELETE_SUCCESS;
         return DELETE_FAILD;
     }

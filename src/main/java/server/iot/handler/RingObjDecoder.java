@@ -1,5 +1,6 @@
 package server.iot.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -17,7 +18,7 @@ public class RingObjDecoder extends ChannelInboundHandlerAdapter {
         String ringJson = (String) msg;
         RingRecord record = readObject(ringJson);
         LOG.info("[----------- RingObjDecoder -----------]");
-        LOG.info(record.toString());
+        LOG.info(JSON.toJSONString(record,true));
         ctx.fireChannelRead(record);
     }
 

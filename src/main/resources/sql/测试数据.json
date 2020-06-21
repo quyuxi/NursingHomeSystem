@@ -1,0 +1,31 @@
+{
+  "area": "[ { \"lng\":101.1, \"lat\":100.2}, {\"lng\":101.3,\"lat\":100.4}, {\"lng\":101.5,\"lat\":100.6}]",
+  "birthday": "2020-05-30",
+  "id": 93010001,
+  "idCard": "12312321321",
+  "joinTime": "2020-05-30",
+  "name": "string",
+  "phone": "string",
+  "relatives": [
+    {
+      "address": "1",
+      "birthday": "2020-01-01",
+      "elderId": "93010001",
+      "id": 0,
+      "idCard": "1",
+      "name": "1",
+      "phone": "1",
+      "sex": "1"
+    },{
+      "address": "2",
+      "birthday": "2020-01-01",
+      "elderId": "93010001",
+      "id": 1,
+      "idCard": "2",
+      "name": "2",
+      "phone": "2",
+      "sex": "2"
+    }
+  ],
+  "sex": "男"
+}
