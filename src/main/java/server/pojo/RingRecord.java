@@ -2,7 +2,7 @@ package server.pojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import server.iot.tools.DateAndTime;
+import server.utils.DateAndTime;
 
 public class RingRecord {
     private int id;

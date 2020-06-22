@@ -1,4 +1,4 @@
-package server.iot.tools;
+package server.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

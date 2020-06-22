@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/NursingHomeSystem?useUnicode=true&characterEncoding=UTF-8&useSSL=false&&allowMultiQueries=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 100
+    maxActive: 500
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 100
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+
+
+logging:
+  level:
+    io:
+      netty: INFO
+    server:
+      dao: debug
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+server:
+  address: 0.0.0.0

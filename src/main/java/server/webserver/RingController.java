@@ -14,7 +14,7 @@ import server.pojo.RingRecord;
 import server.service.RingService;
 
 import java.util.List;
-import java.util.Map;
+
 
 import static server.cache.RingDataCache.CACHE;
 
@@ -38,9 +38,10 @@ public class RingController {
     public String queryLastRingData(int id) {
         LOGGER.info("查询最新手环数据，老人id：{}", id);
         RingRecord ringRecord = CACHE.get(id);
-        if (null == ringRecord)
+        if (null == ringRecord){
             ringRecord =  ringService.queryLastRingData(id);
-
+            CACHE.put(id,ringRecord);
+        }
         return JSON.toJSONString(ringRecord);
 
 
