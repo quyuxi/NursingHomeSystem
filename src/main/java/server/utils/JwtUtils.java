@@ -35,7 +35,7 @@ public class JwtUtils {
      * @param role
      * @return
      */
-    public static String sign(String username, String role) {
+    public static String sign(String username, int role) {
         //过期时间
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         //私钥及加密算法

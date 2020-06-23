@@ -20,7 +20,7 @@ import static server.constant.ElderConstant.*;
  */
 
 @RestController
-@RequestMapping(value = "/elder")
+@RequestMapping(value = "/NursingHomeSystem/elder")
 public class ElderController {
 
 

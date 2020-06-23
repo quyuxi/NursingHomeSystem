@@ -19,7 +19,7 @@ import java.util.List;
 import static server.cache.RingDataCache.CACHE;
 
 @RestController
-@RequestMapping(value = "/ring")
+@RequestMapping(value = "/NursingHomeSystem/ring")
 public class RingController {
 
 

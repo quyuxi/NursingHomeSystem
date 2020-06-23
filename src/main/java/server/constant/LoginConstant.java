@@ -75,5 +75,8 @@ public final class LoginConstant {
      */
     public static final String TOKEN_INVALID = "TOKEN_INVALID";
 
+    public static final int ADMIN = 1;
+    public static final int MEMBER = 0;
+
 
 }

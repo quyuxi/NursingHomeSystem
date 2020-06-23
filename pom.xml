@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.iot_93</groupId>
-    <artifactId>nursing-home-system</artifactId>
-    <name>nursing-home-system</name>
+    <artifactId>NursingHomeSystem</artifactId>
+    <name>NursingHomeSystem</name>
     <version>1.0.0</version>
     <description>Spring Boot</description>
 
@@ -139,25 +139,6 @@
                 <configuration>
                     <executable>true</executable>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/resources/package.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>

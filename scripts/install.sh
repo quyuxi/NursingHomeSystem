@@ -1,7 +1,5 @@
-#! /bin/bahs
+#! /bin/bash
+mkdir /usr/local/nursinghomesystem
+chmod -R 777 /usr/local/nursinghomesystem
+cp  ./nursing-home-system-1.0.0.jar  /usr/local/nursinghomesystem/app.jar
 
-mkdir /usr/local/NursingHomeSystem
-chmod -R 777 /usr/local/NursingHomeSystem
-cp  ./NursingHomeSystem*.jar  /usr/local/NursingHomeSystem/app.jar
-sudo ln -s /home/app.jar /etc/init.d/app
-service app start

@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import server.annotation.Admin;
-import server.constant.Constant;
 import server.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static server.constant.LoginConstant.ADMIN;
 import static server.constant.LoginConstant.TOKEN_INVALID;
 
 
@@ -72,7 +72,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
             // 如果加了@Admin注解，比如用户有admin权限
             String token = request.getHeader("token");
-            return Constant.ADMIN.equals(JwtUtils.verity(token));
+            return ADMIN == Integer.parseInt(JwtUtils.verity(token));
         }
         return true;
     }

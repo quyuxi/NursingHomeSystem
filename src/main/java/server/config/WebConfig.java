@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import server.interceptor.AuthenticationInterceptor;
 
-//@Configuration
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -18,9 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(authenticationInterceptor)// 注册拦截器
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/swagger-ui.html")
-                .addPathPatterns("/user/**")
-                .addPathPatterns("/ring/**")
-                .addPathPatterns("/elder/**");
+                .addPathPatterns("/NursingHomeSystem/user/**")
+                .addPathPatterns("/NursingHomeSystem/ring/**")
+                .addPathPatterns("/NursingHomeSystem/elder/**");
     }
 
 

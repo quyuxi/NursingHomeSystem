@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class SystemUser {
     private String id;    //格式"u + nursHomeId + localId" 如 "u 01 0001"
     private String password;
-    private String role;
+    private int role;
     private int nursHomeId;
     private String realName;
     private String sex;

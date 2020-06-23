@@ -1,4 +1,6 @@
-# CREATE DATABASE IF NOT EXISTS NursingHomeSystem DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS NursingHomeSystem DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+USE NursingHomeSystem;
 
 SET foreign_key_checks = 0;
 /*
@@ -202,7 +204,7 @@ CREATE TABLE `SystemUser`
 (
     `id`         varchar(50)                 NOT NULL ,
     `nursHomeId` int(50)             NOT NULL COMMENT '所属养老院',
-    `role`       enum ('admin','member') NOT NULL DEFAULT 'member' COMMENT '角色：包括管理员和普通用户',
+    `role`       int (1)          NOT NULL DEFAULT 0 COMMENT '角色：包括管理员和普通用户',
     `password`   varchar(255)            NOT NULL,
     `realName`   varchar(10)             NOT NULL,
     `sex`        varchar(10)             NOT NULL,

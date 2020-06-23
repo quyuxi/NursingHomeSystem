@@ -19,7 +19,7 @@ import static server.constant.LoginConstant.*;
  */
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/NursingHomeSystem/user")
 public class SystemUserController {
 
 
@@ -43,7 +43,7 @@ public class SystemUserController {
         }
         if (systemUser.getPassword().equals(password)) {
             response.setHeader("token", JwtUtils.sign(id, systemUser.getRole()));
-            return systemUser.getRole().equals("admin")?LOGIN_ADMINSTRATOR:LOGIN_USERPERMIT;
+            return systemUser.getRole() == ADMIN ?LOGIN_ADMINSTRATOR:LOGIN_USERPERMIT;
 
         }else{
             return LOGIN_WRONGPASSWORD;
@@ -52,7 +52,7 @@ public class SystemUserController {
     }
 
 
-    @Admin
+
     @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
     public Object findUserInfo(@PathVariable("id") String id) {
         SystemUser user = systemUserService.findUserInfoById(id);
