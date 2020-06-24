@@ -1,8 +1,11 @@
 package server.webserver;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import server.Application;
 import server.annotation.Admin;
 import server.pojo.SystemUser;
 import server.service.SystemUserService;
@@ -11,6 +14,7 @@ import server.utils.JwtUtils;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static server.cache.LoginCache.TOKEN_CACHE;
 import static server.constant.LoginConstant.*;
 
 /**
@@ -21,7 +25,7 @@ import static server.constant.LoginConstant.*;
 @RestController
 @RequestMapping(value = "/NursingHomeSystem/user")
 public class SystemUserController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(SystemUserController.class);
 
     @Autowired
     SystemUserService systemUserService;
@@ -36,13 +40,18 @@ public class SystemUserController {
      */
     @PostMapping("/login")
     public String login(@RequestParam String id,@RequestParam String password, HttpServletResponse response) {
-
+        LOGGER.info("开始登陆，用户id:{}",id);
         SystemUser systemUser = systemUserService.findUserInfoById(id);
         if(null ==systemUser){
             return LOGIN_NOPERMISSION;
         }
         if (systemUser.getPassword().equals(password)) {
-            response.setHeader("token", JwtUtils.sign(id, systemUser.getRole()));
+            //登陆成功保存token
+            //登出是删除token
+            String token = JwtUtils.sign(id, systemUser.getRole());
+            TOKEN_CACHE.put(id,token);
+            response.setHeader("token", token);
+
             return systemUser.getRole() == ADMIN ?LOGIN_ADMINSTRATOR:LOGIN_USERPERMIT;
 
         }else{
@@ -51,6 +60,20 @@ public class SystemUserController {
 
     }
 
+    /**
+     * 登录成功返回token
+     *
+     * @param id 用户id
+     * @return
+     */
+    @PostMapping("/logout")
+    public Boolean logout(@RequestParam String id) {
+        if (TOKEN_CACHE.contains(id)){
+            TOKEN_CACHE.remove(id);
+        }
+       return true;
+
+    }
 
 
     @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)

@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)// 注册拦截器
-                .excludePathPatterns("/user/login")
+                .excludePathPatterns("/NursingHomeSystem/user/login")
                 .excludePathPatterns("/swagger-ui.html")
                 .addPathPatterns("/NursingHomeSystem/user/**")
                 .addPathPatterns("/NursingHomeSystem/ring/**")

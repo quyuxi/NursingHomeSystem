@@ -55,12 +55,12 @@ public class JwtUtils {
      * @param token
      * @return
      */
-    public static String verity(String token) {
+    public static Integer verity(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
-            return jwt.getClaim("role").asString();
+            return jwt.getClaim("role").asInt();
         } catch (IllegalArgumentException | JWTVerificationException e) {
             LOGGER.error("鉴权失败,token无效");
             return null;
