@@ -31,11 +31,11 @@ public class JwtUtils {
     /**
      * 生成签名
      *
-     * @param username
+     * @param id
      * @param role
      * @return
      */
-    public static String sign(String username, int role) {
+    public static String sign(String id, int role) {
         //过期时间
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         //私钥及加密算法
@@ -45,7 +45,7 @@ public class JwtUtils {
         header.put("typ", "JWT");
         header.put("alg", "HS256");
         //附带username和userID生成签名
-        return JWT.create().withHeader(header).withClaim("loginName", username)
+        return JWT.create().withHeader(header).withClaim("id", id)
                 .withClaim("role", role).withExpiresAt(date).sign(algorithm);
     }
 
