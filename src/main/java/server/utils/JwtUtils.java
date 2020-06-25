@@ -67,4 +67,16 @@ public class JwtUtils {
         }
 
     }
+
+    public static String getId(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT jwt = verifier.verify(token);
+            return jwt.getClaim("id").asString();
+        } catch (IllegalArgumentException | JWTVerificationException e) {
+            LOGGER.error("鉴权失败,token无效");
+            return null;
+        }
+    }
 }

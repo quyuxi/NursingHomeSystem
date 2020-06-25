@@ -1,11 +1,7 @@
 package server.cache;
 
-import com.alibaba.fastjson.JSONObject;
 import server.pojo.RingRecord;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

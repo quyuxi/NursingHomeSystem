@@ -18,7 +18,9 @@
         WHERE id = #{id}
     </delete>
     <delete id="deleteSystemUserById">
-        delete from SystemUser where id=#{id}
+        delete
+        from SystemUser
+        where id = #{id}
     </delete>
 
 
@@ -44,9 +46,9 @@
 
     <insert id="createSystemUser" parameterType="server.pojo.SystemUser">
 
-        insert into SystemUser (id, password,role,nursHomeId,realName,sex,birthday,phone)
+        insert into SystemUser (id, password, role, nursHomeId, realName, sex, birthday, phone)
         values (#{id}, #{password}, #{role},
-                #{nursHomeId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},#{sex},#{birthday},#{phone})
+                #{nursHomeId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sex}, #{birthday}, #{phone})
 
     </insert>
 

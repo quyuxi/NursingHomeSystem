@@ -14,10 +14,12 @@ public class RelativeService {
     RelativesDao relativesDao;
 
     public boolean create(List<Relative> relatives) {
-
+        if (null == relatives){
+            return true;
+        }
         for (Relative relative : relatives) {
             boolean res = relativesDao.insert(relative);
-            if(res){
+            if (res) {
                 continue;
             }
             return res;

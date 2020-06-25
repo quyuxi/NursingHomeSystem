@@ -1,7 +1,6 @@
 package server.cache;
 
 
-
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LoginCache {

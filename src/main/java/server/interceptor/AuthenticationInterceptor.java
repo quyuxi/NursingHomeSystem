@@ -1,6 +1,8 @@
 package server.interceptor;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -9,10 +11,8 @@ import server.utils.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.Collection;
 
-import static org.mockito.ArgumentMatchers.contains;
 import static server.cache.LoginCache.TOKEN_CACHE;
 import static server.constant.LoginConstant.ADMIN;
 import static server.constant.LoginConstant.TOKEN_INVALID;
@@ -26,6 +26,7 @@ import static server.constant.LoginConstant.TOKEN_INVALID;
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -49,11 +50,15 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
     private boolean hasPermission(HttpServletRequest request) {
         String token = request.getHeader("token");
+        LOGGER.debug("开始校验token :"+token);
         if (StringUtils.isEmpty(token)) {
+            LOGGER.error("没有在请求中发现token");
             return false;
-        };
+        }
+        ;
         Collection<String> values = TOKEN_CACHE.values();
-        if (!values.contains(token)){
+        if (!values.contains(token)) {
+            LOGGER.error("该token无效，token: " + token);
             return false;
         }
         return null != JwtUtils.verity(token);
@@ -79,7 +84,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             // 如果加了@Admin注解，比如用户有admin权限
             String token = request.getHeader("token");
             Integer role = JwtUtils.verity(token);
-            if (null == role){
+            if (null == role) {
                 return false;
             }
             return ADMIN == role;

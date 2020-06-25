@@ -46,7 +46,6 @@ public class SystemUserService {
     }
 
 
-
     public boolean deleteSystemUserById(String id) {
         return systemuserDao.deleteSystemUserById(id);
     }

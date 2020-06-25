@@ -1,11 +1,11 @@
 package server.webserver;
 
 
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import server.Application;
 import server.annotation.Admin;
 import server.pojo.SystemUser;
 import server.service.SystemUserService;
@@ -34,27 +34,27 @@ public class SystemUserController {
     /**
      * 登录成功返回token
      *
-     * @param id 用户id
+     * @param id       用户id
      * @param password 用户id
      * @return
      */
     @PostMapping("/login")
-    public String login(@RequestParam String id,@RequestParam String password, HttpServletResponse response) {
-        LOGGER.info("开始登陆，用户id:{}",id);
+    public String login(@RequestParam String id, @RequestParam String password, HttpServletResponse response) {
+        LOGGER.info("开始登陆，用户id:{}", id);
         SystemUser systemUser = systemUserService.findUserInfoById(id);
-        if(null ==systemUser){
+        if (null == systemUser) {
             return LOGIN_NOPERMISSION;
         }
         if (systemUser.getPassword().equals(password)) {
             //登陆成功保存token
             //登出是删除token
             String token = JwtUtils.sign(id, systemUser.getRole());
-            TOKEN_CACHE.put(id,token);
+            TOKEN_CACHE.put(id, token);
             response.setHeader("token", token);
 
-            return systemUser.getRole() == ADMIN ?LOGIN_ADMINSTRATOR:LOGIN_USERPERMIT;
+            return systemUser.getRole() == ADMIN ? LOGIN_ADMINSTRATOR : LOGIN_USERPERMIT;
 
-        }else{
+        } else {
             return LOGIN_WRONGPASSWORD;
         }
 
@@ -66,12 +66,12 @@ public class SystemUserController {
      * @param id 用户id
      * @return
      */
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public Boolean logout(@RequestParam String id) {
-        if (TOKEN_CACHE.contains(id)){
+        if (TOKEN_CACHE.contains(id)) {
             TOKEN_CACHE.remove(id);
         }
-       return true;
+        return true;
 
     }
 
@@ -96,7 +96,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createNewUser(@RequestBody SystemUser user) {
-
+        LOGGER.debug("创建新用户,"+ JSON.toJSONString(user,true));
         if (systemUserService.findUserInfoById(user.getId()) != null) {
             return CREATE__REPEATNAME;
         }
@@ -110,6 +110,7 @@ public class SystemUserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateUser(@RequestBody SystemUser user) {
+        LOGGER.debug("更新用户信息,"+ JSON.toJSONString(user,true));
         if (systemUserService.findUserInfoById(user.getId()) == null) {
             return UPDATE_NULL;
         }
@@ -132,6 +133,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") String id) {
+        LOGGER.info("删除用户"+id);
         if (systemUserService.deleteSystemUserById(id))
             return DELETE_SUCCESS;
         return DELETE_FAILD;

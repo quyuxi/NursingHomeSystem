@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import server.dao.ElderDao;
 import server.pojo.Elder;
 
-
 import java.util.List;
 
 /**
@@ -46,9 +45,9 @@ public class ElderService {
     }
 
     public boolean deleteElderById(int id) {
-        return relativeService.deleteByElderId(id)
-                && ringService.deleteByElderId(id)
-                &&elderDao.deleteElderById(id);
+        relativeService.deleteByElderId(id);
+        return ringService.deleteByElderId(id)
+                && elderDao.deleteElderById(id);
     }
 
 

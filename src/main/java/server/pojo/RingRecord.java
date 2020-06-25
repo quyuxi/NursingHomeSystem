@@ -15,11 +15,12 @@ public class RingRecord {
     private Kinestate kinestat;
     //json不要
     //api json不要
-    @JSONField(serialize = false)
+//    @JSONField(serialize = false)
     private KeyEvent keyEvent;
 
 
     @JsonIgnore
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private String time;
 
     public RingRecord() {

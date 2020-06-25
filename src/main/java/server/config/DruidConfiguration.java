@@ -21,7 +21,7 @@ public class DruidConfiguration {
      *
      * @return DataSource
      */
-    @Bean
+    @Bean(initMethod = "init")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druid() {
         return new DruidDataSource();

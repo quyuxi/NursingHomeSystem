@@ -20,8 +20,8 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="server.pojo.Relative" useGeneratedKeys="true">
         insert into Relative (`name`, sex, birthday,
-                               phone, idCard, address,
-                               elderId)
+                              phone, idCard, address,
+                              elderId)
         values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
                 #{phone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
                 #{elderId,jdbcType=INTEGER})
@@ -109,9 +109,9 @@
             sex      = #{sex,jdbcType=VARCHAR},
             birthday = #{birthday,jdbcType=DATE},
             phone    = #{phone,jdbcType=VARCHAR},
-            idCard  = #{idCard,jdbcType=VARCHAR},
+            idCard   = #{idCard,jdbcType=VARCHAR},
             address  = #{address,jdbcType=VARCHAR},
-            elderId = #{elderId,jdbcType=INTEGER}
+            elderId  = #{elderId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

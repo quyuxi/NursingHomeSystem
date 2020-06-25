@@ -1,9 +1,5 @@
 package server.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.cache.RingDataCache;
@@ -12,7 +8,9 @@ import server.pojo.PhysicalData;
 import server.pojo.Position;
 import server.pojo.RingRecord;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @创建人 quyuxi
@@ -32,11 +30,11 @@ public class RingService {
     ElderService elderService;
 
 
-    public boolean insertRingData(int id, Position position, int battery, PhysicalData physiological, double lat, double lng, String dateTime,String acceleration,String palstance ) {
-        boolean r1 = ringDao.insertPosition(lat,lng,id,dateTime);
-        boolean r2 = ringDao.insertPosture(acceleration,palstance,id,dateTime);
-        boolean r3 = ringDao.insertPhysiological(physiological.getHeartRate(),physiological.getBloodPressuer(),physiological.getTemperature(),id,dateTime);
-        boolean r4 = ringDao.updateRingInfo(id,battery,dateTime);
+    public boolean insertRingData(int id, Position position, int battery, PhysicalData physiological, double lat, double lng, String dateTime, String acceleration, String palstance) {
+        boolean r1 = ringDao.insertPosition(lat, lng, id, dateTime);
+        boolean r2 = ringDao.insertPosture(acceleration, palstance, id, dateTime);
+        boolean r3 = ringDao.insertPhysiological(physiological.getHeartRate(), physiological.getBloodPressure(), physiological.getTemperature(), id, dateTime);
+        boolean r4 = ringDao.updateRingInfo(id, battery, dateTime);
         RingRecord ringRecord = new RingRecord();
 
         ringRecord.setId(id);
@@ -59,7 +57,7 @@ public class RingService {
             RingRecord ringRecord = new RingRecord();
             ringRecord.setTime(map.get("time").toString());
             ringRecord.setId(Integer.parseInt(map.get("ring_id").toString()));
-            ringRecord.setPosition(new Position(Double.parseDouble(map.get("lng").toString()),Double.parseDouble(map.get("lat").toString())));
+            ringRecord.setPosition(new Position(Double.parseDouble(map.get("lng").toString()), Double.parseDouble(map.get("lat").toString())));
             ringRecord.setPhysical(new PhysicalData(
                     Integer.parseInt(map.get("heartRate").toString()),
                     Integer.parseInt(map.get("bloodPressuer").toString()),
@@ -68,7 +66,6 @@ public class RingService {
             ringRecord.setBattery(Integer.parseInt(map.get("battery").toString()));
             ringRecords.add(ringRecord);
         }
-
         return ringRecords;
     }
 
@@ -82,7 +79,6 @@ public class RingService {
 
 
         RingRecord ringRecord = new RingRecord();
-
         ringRecord.setId(ringId);
         ringRecord.setBattery(Integer.parseInt(ringInfo.get("battery").toString()));
         ringRecord.setPhysical(physiological);
@@ -95,18 +91,20 @@ public class RingService {
 
 
     public List<server.pojo.Position> getSafeArea(int id) {
-        JSONArray array = JSON.parseArray(ringDao.getSafeArea(id));
-        ArrayList<Position> positions = new ArrayList<>();
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject tmp = array.getJSONObject(i);
-            positions.add(new Position(tmp.getDouble("lng"), tmp.getDouble("lat")));
+        // 格式如  111,222ra111,222,ra
+        String area = ringDao.getSafeArea(id);
+        String[] areaArr = area.split("ra");
 
+        ArrayList<Position> positions = new ArrayList<>();
+        for (String s : areaArr) {
+            String[] split = s.split(",");
+            positions.add(new Position(Double.parseDouble(split[0]), Double.parseDouble(split[1])));
         }
         return positions;
     }
 
     public boolean createRingInfo(int ringId, String startTime) {
-        return ringDao.createRingInfo(ringId, 100,startTime);
+        return ringDao.createRingInfo(ringId, 100, startTime);
     }
 
     public boolean deleteByElderId(int id) {

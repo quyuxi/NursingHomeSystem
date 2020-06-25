@@ -7,13 +7,13 @@ import lombok.Data;
 public class PhysicalData {
 
     private int heartRate;
-    private int bloodPressuer;
+    private int bloodPressure;
     private double temperature;
 
     public PhysicalData(int heartRate, int bloodPressuer, double temperature) {
 
         this.heartRate = heartRate;
-        this.bloodPressuer = bloodPressuer;
+        this.bloodPressure = bloodPressuer;
         this.temperature = temperature;
     }
 
@@ -24,7 +24,7 @@ public class PhysicalData {
     public String toString() {
         String physical = "{PhysicalData = " + super.toString()
                 + ", heartRate = " + heartRate
-                + ", bloodPressuer = " + bloodPressuer
+                + ", bloodPressure = " + bloodPressure
                 + ", temperature = " + temperature + "}";
         return physical;
     }

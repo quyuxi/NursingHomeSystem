@@ -18,7 +18,7 @@ public class RingObjDecoder extends ChannelInboundHandlerAdapter {
         String ringJson = (String) msg;
         RingRecord record = readObject(ringJson);
         LOG.info("[----------- RingObjDecoder -----------]");
-        LOG.info(JSON.toJSONString(record,true));
+        LOG.info(JSON.toJSONString(record, true));
         ctx.fireChannelRead(record);
     }
 

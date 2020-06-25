@@ -2,8 +2,6 @@ package server.pojo;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * SystemUser
  *

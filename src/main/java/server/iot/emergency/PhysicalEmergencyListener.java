@@ -9,7 +9,7 @@ public class PhysicalEmergencyListener extends EmergencyListener {
     protected boolean abnormal(RingRecord record) {
         PhysicalData physical = record.getPhysical();
         boolean result = normalHeartRate(physical.getHeartRate())
-                && normalBloodPress(physical.getBloodPressuer())
+                && normalBloodPress(physical.getBloodPressure())
                 && normalTemperature(physical.getTemperature());
         return result;
     }

@@ -25,6 +25,7 @@ import java.util.concurrent.Executors;
 @EnableSwagger2
 public class Application {
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+
     public static void main(String[] args) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -37,7 +38,6 @@ public class Application {
         SpringUtils.applicationContext = SpringApplication.run(Application.class, args);
         LOGGER.info("服务启动已启动...");
     }
-
 
 
 }

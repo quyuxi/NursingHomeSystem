@@ -6,12 +6,12 @@
         <id column="ring_id" property="id"/>
         <result column="battery" property="battery"/>
         <result column="time" property="time"/>
-        <association property="physical" javaType="server.pojo.PhysicalData" >
+        <association property="physical" javaType="server.pojo.PhysicalData">
             <result column="heartRate" property="heartRate"/>
-            <result column="bloodPressuer" property="bloodPressuer"/>
+            <result column="bloodPressuer" property="bloodPressure"/>
             <result column="temperature" property="temperature"/>
         </association>
-        <association property="position" javaType="server.pojo.Position" >
+        <association property="position" javaType="server.pojo.Position">
             <result column="lng" property="lng"/>
             <result column="lat" property="lat"/>
         </association>
@@ -23,34 +23,35 @@
 
         update RingInfo
         set battery=#{battery}
-        , date_time=#{dateTime}
+          , date_time=#{dateTime}
         where ring_id = #{ringId}
 
     </update>
     <delete id="deleteByElderId">
-        delete from RingInfo where ring_id=#{id}
+        delete
+        from RingInfo
+        where ring_id = #{id}
     </delete>
 
 
-    <select id="queryDataByTime" resultType="java.util.Map" >
+    <select id="queryDataByTime" resultType="java.util.Map">
 
-        SELECT
-        t1.ring_id as ring_id,
-        t3.battery as battery,
-        t2.heartRate as heartRate,
-        t2.bloodPressuer as bloodPressuer,
-        t2.temperature as temperature,
-        t1.lng as lng,
-        t1.lat as lat,
-        t1.date_time as time
+        SELECT t1.ring_id       as ring_id,
+               t3.battery       as battery,
+               t2.heartRate     as heartRate,
+               t2.bloodPressuer as bloodPressuer,
+               t2.temperature   as temperature,
+               t1.lng           as lng,
+               t1.lat           as lat,
+               t1.date_time     as time
         FROM Position as t1
-        left join PhysicalData as t2 on t1.date_time=t2.date_time
+                 left join PhysicalData as t2 on t1.id = t2.id
 
-        left join  RingInfo as t3 on t2.ring_id = t3.ring_id
+                 left join RingInfo as t3 on t2.ring_id = t3.ring_id
 
-        where t1.ring_id=#{ringId} and t1.date_time &gt; #{startTime} and t1.date_time &lt; #{endTime}
-
-
+        where t1.ring_id = #{ringId}
+          and t1.date_time &gt; #{startTime}
+          and t1.date_time &lt; #{endTime}
 
 
     </select>
@@ -90,12 +91,12 @@
     </select>
 
 
-    <insert id="insertPosition" >
+    <insert id="insertPosition">
         insert into Position
         values (null, #{lat}, #{lng}, #{ringId}, #{dateTime})
     </insert>
 
-    <insert id="insertPosture" >
+    <insert id="insertPosture">
 
         insert into Posture
         values (null, #{acceleration}, #{palstance}, #{ringId}, #{dateTime})
@@ -104,7 +105,7 @@
         insert into PhysicalData
         values (null, #{heartRate}, #{bloodPressuer}, #{temperature}, #{ringId}, #{dateTime})
     </insert>
-    <insert id="insertRingInfo" >
+    <insert id="insertRingInfo">
         insert into RingInfo
         values (#{ringId}, #{battery}, #{dateTime})
     </insert>

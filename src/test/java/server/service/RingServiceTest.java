@@ -8,18 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import server.Application;
 
-import java.util.List;
-import java.util.Map;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
 public class RingServiceTest {
 
+    private final String elerid = "93010001";
     @Autowired
     RingService ringService;
-
-    private final String elerid = "93010001";
-
 
     @Test
     public void insertRingdata() throws InterruptedException {

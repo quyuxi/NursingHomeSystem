@@ -1,15 +1,21 @@
 package server.webserver;
 
+import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import server.Application;
 import server.annotation.Admin;
-
 import server.pojo.Elder;
 import server.service.ElderService;
 import server.service.RelativeService;
 import server.service.RingService;
+import server.utils.DateAndTime;
+import server.utils.JwtUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static server.constant.ElderConstant.*;
@@ -22,7 +28,7 @@ import static server.constant.ElderConstant.*;
 @RestController
 @RequestMapping(value = "/NursingHomeSystem/elder")
 public class ElderController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElderController.class);
 
     @Autowired
     ElderService elderService;
@@ -34,6 +40,7 @@ public class ElderController {
 
     @GetMapping(value = "/find/{id}")
     public Object getElderByID(@PathVariable("id") int id) {
+        LOGGER.info("查询老人信息，id: "+id);
         Elder elder = elderService.selectElderById(id);
         if (elder == null)
             return FINDELDER_NULL;
@@ -43,6 +50,7 @@ public class ElderController {
 
     @GetMapping(value = "/listAll")
     public Object listAllElder() {
+        LOGGER.info("查询所有老人信息");
         List<Elder> elders = elderService.selectElderList();
         if (CollectionUtils.isEmpty(elders))
             return LISTELDER_NULL;
@@ -51,16 +59,28 @@ public class ElderController {
 
 
     @GetMapping(value = "/newID")
-    public String getNewElderID() {
-        return elderService.getNewID();
+    public String getNewElderID(HttpServletRequest request) {
+        String id = "";
+        try {
+            id=elderService.getNewID();
+        }catch (Exception e){
+            id = JwtUtils.getId(request.getHeader("token"));
+            id = id.substring(1,3);
+            id = "93"+id+"0001";
+        }
+        return id;
     }
 
     @Admin
     @PostMapping(value = "/create")
     public String createElder(@RequestBody Elder elder) {
+        LOGGER.debug("创建老人,"+ JSON.toJSONString(elder,true));
+        if (null == elder.getJoinTime()){
+            elder.setJoinTime(DateAndTime.getCurrentTimeAsStr());
+        }
         if (elderService.createElder(elder)
                 && ringService.createRingInfo(elder.getId(), elder.getJoinTime())
-                &&relativeService.create(elder.getRelatives())) {
+                && relativeService.create(elder.getRelatives())) {
             return CREATE_SUCCESS;
         }
         return CREATE_FAILD;
@@ -69,6 +89,7 @@ public class ElderController {
     @Admin
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String amendElder(@RequestBody Elder elder) {
+        LOGGER.debug("修改老人信息,"+ JSON.toJSONString(elder,true));
         if (elderService.selectElderById(elder.getId()) == null)
             return UPDATE_NULL;
         if (elderService.updateElder(elder))
@@ -78,9 +99,10 @@ public class ElderController {
 
 
     @Admin
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String deleteElder(@PathVariable("id") int id) {
-        if (elderService.deleteElderById(id))
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteElder(@RequestBody Elder elder) {
+        LOGGER.debug("删除老人"+JSON.toJSONString(elder,true));
+        if (elderService.deleteElderById(elder.getId()))
             return DELETE_SUCCESS;
         return DELETE_FAILD;
     }
