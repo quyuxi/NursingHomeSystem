@@ -4,7 +4,6 @@ package server;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -21,7 +20,6 @@ import java.util.concurrent.Executors;
 
 @MapperScan(basePackages = "server.dao")
 @SpringBootApplication
-@EnableCaching
 @ServletComponentScan
 @EnableSwagger2
 public class Application {

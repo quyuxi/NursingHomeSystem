@@ -15,7 +15,7 @@ public class EmergencyController {
 
 
     @RequestMapping("/getEmergency/{nursingHomeId}")
-    public List<EmergencyEvent> getEmergency(@PathVariable int nursingHomeId){
+    public List<EmergencyEvent> getEmergency(@PathVariable int nursingHomeId) {
         return EmergencyCache.instance().getEvents(nursingHomeId);
     }
 }

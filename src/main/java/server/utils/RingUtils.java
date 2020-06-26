@@ -26,7 +26,7 @@ public class RingUtils {
                 record.getPosition().getLat()
                 , record.getPosition().getLng(),
                 record.getTime(), JSON.toJSONString(record.getKinestat().getAcc()), JSON.toJSONString(record.getKinestat().getPal()));
-        LOG.debug("插入手环数据," + JSON.toJSONString(record,true));
+        LOG.debug("插入手环数据," + JSON.toJSONString(record, true));
         LOG.info("插入手环数据," + result);
     }
 

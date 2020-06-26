@@ -14,7 +14,7 @@ public class RelativeService {
     RelativesDao relativesDao;
 
     public boolean create(List<Relative> relatives) {
-        if (null == relatives){
+        if (null == relatives) {
             return true;
         }
         for (Relative relative : relatives) {

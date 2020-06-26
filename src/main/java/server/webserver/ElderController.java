@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import server.Application;
 import server.annotation.Admin;
 import server.pojo.Elder;
 import server.service.ElderService;
@@ -40,7 +39,7 @@ public class ElderController {
 
     @GetMapping(value = "/find/{id}")
     public Object getElderByID(@PathVariable("id") int id) {
-        LOGGER.info("查询老人信息，id: "+id);
+        LOGGER.info("查询老人信息，id: " + id);
         Elder elder = elderService.selectElderById(id);
         if (elder == null)
             return FINDELDER_NULL;
@@ -62,11 +61,11 @@ public class ElderController {
     public String getNewElderID(HttpServletRequest request) {
         String id = "";
         try {
-            id=elderService.getNewID();
-        }catch (Exception e){
+            id = elderService.getNewID();
+        } catch (Exception e) {
             id = JwtUtils.getId(request.getHeader("token"));
-            id = id.substring(1,3);
-            id = "93"+id+"0001";
+            id = id.substring(1, 3);
+            id = "93" + id + "0001";
         }
         return id;
     }
@@ -74,8 +73,8 @@ public class ElderController {
     @Admin
     @PostMapping(value = "/create")
     public String createElder(@RequestBody Elder elder) {
-        LOGGER.debug("创建老人,"+ JSON.toJSONString(elder,true));
-        if (null == elder.getJoinTime()){
+        LOGGER.debug("创建老人," + JSON.toJSONString(elder, true));
+        if (null == elder.getJoinTime()) {
             elder.setJoinTime(DateAndTime.getCurrentTimeAsStr());
         }
         if (elderService.createElder(elder)
@@ -89,7 +88,7 @@ public class ElderController {
     @Admin
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String amendElder(@RequestBody Elder elder) {
-        LOGGER.debug("修改老人信息,"+ JSON.toJSONString(elder,true));
+        LOGGER.debug("修改老人信息," + JSON.toJSONString(elder, true));
         if (elderService.selectElderById(elder.getId()) == null)
             return UPDATE_NULL;
         if (elderService.updateElder(elder))
@@ -101,7 +100,7 @@ public class ElderController {
     @Admin
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteElder(@RequestBody Elder elder) {
-        LOGGER.debug("删除老人"+JSON.toJSONString(elder,true));
+        LOGGER.debug("删除老人" + JSON.toJSONString(elder, true));
         if (elderService.deleteElderById(elder.getId()))
             return DELETE_SUCCESS;
         return DELETE_FAILD;

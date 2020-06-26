@@ -13,15 +13,15 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `Elder`;
 CREATE TABLE `Elder`
 (
-    `id`       int(50)      NOT NULL,
-    `name`     varchar(255) NOT NULL COMMENT "姓名",
-    `sex`      varchar(255) NOT NULL COMMENT "性别",
-    `birthday` date         NOT NULL COMMENT "出生日期",
-    `phone`    varchar(255) NOT NULL COMMENT "手机号",
-    `idCard`   varchar(255) NOT NULL COMMENT "身份证号",
-    `joinTime` date         NOT NULL COMMENT "入院时间",
-    `address`  varchar(255) COMMENT "家庭住址",
-    `area`     varchar(255) NOT NULL COMMENT '活动范围',
+    `id`        int(50)      NOT NULL,
+    `name`      varchar(255) NOT NULL COMMENT "姓名",
+    `sex`       varchar(255) NOT NULL COMMENT "性别",
+    `birthday`  date         NOT NULL COMMENT "出生日期",
+    `phone`     varchar(255) NOT NULL COMMENT "手机号",
+    `idCard`    varchar(255) NOT NULL COMMENT "身份证号",
+    `joinTime`  date         NOT NULL COMMENT "入院时间",
+    `address`   varchar(255) COMMENT "家庭住址",
+    `area`      varchar(255) NOT NULL COMMENT '活动范围',
     `isDeleted` bool default false,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -41,8 +41,8 @@ Ring
 DROP TABLE IF EXISTS `RingInfo`;
 CREATE TABLE `RingInfo`
 (
-    `ring_id`   int(50)  NOT NULL COMMENT '手环id',
-    `battery`   int(3)   NOT NULL COMMENT '电池电量',
+    `ring_id`   int(50)     NOT NULL COMMENT '手环id',
+    `battery`   int(3)      NOT NULL COMMENT '电池电量',
     `date_time` datetime(3) NOT NULL COMMENT '最后更新时间',
     `isDeleted` bool default false,
     PRIMARY KEY (`ring_id`)
@@ -63,8 +63,8 @@ RingKeyInfo  手环按键信息
 DROP TABLE IF EXISTS `RingKeyInfo`;
 CREATE TABLE `RingKeyInfo`
 (
-    `id`        BigInt NOT NULL ,
-    `ring_id`   int(50)  NOT NULL COMMENT '手环id',
+    `id`        BigInt      NOT NULL,
+    `ring_id`   int(50)     NOT NULL COMMENT '手环id',
     `date_time` datetime(3) NOT NULL COMMENT '最后更新时间',
     PRIMARY KEY (`id`),
     KEY `ringKeyInfo_ring_id` (`ring_id`),
@@ -85,12 +85,12 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `PhysicalData`;
 CREATE TABLE `PhysicalData`
 (
-    `id`            BigInt PRIMARY KEY NOT NULL AUTO_INCREMENT ,
-    `heartRate`     varchar(255)         NOT NULL COMMENT '心率',
-    `bloodPressuer` int(5)               NOT NULL COMMENT '血压',
-    `temperature`   double(10, 0)        NOT NULL COMMENT '体温',
-    `ring_id`       int(50)              NOT NULL COMMENT '手环id',
-    `date_time`     datetime(3)             NOT NULL COMMENT '最后更新时间',
+    `id`            BigInt PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `heartRate`     varchar(255)       NOT NULL COMMENT '心率',
+    `bloodPressuer` int(5)             NOT NULL COMMENT '血压',
+    `temperature`   double(10, 0)      NOT NULL COMMENT '体温',
+    `ring_id`       int(50)            NOT NULL COMMENT '手环id',
+    `date_time`     datetime(3)        NOT NULL COMMENT '最后更新时间',
 
     KEY `p_r_id` (`ring_id`),
     CONSTRAINT `p_r_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
@@ -111,10 +111,10 @@ DROP TABLE IF EXISTS `Position`;
 CREATE TABLE `Position`
 (
     `id`        BigInt PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `lat`       varchar(50)          NOT NULL COMMENT '纬度',
-    `lng`       varchar(50)          NOT NULL COMMENT '经度',
-    `ring_id`   int(50)              NOT NULL COMMENT '手环id',
-    `date_time` datetime(3)             NOT NULL COMMENT '最后更新时间',
+    `lat`       varchar(50)        NOT NULL COMMENT '纬度',
+    `lng`       varchar(50)        NOT NULL COMMENT '经度',
+    `ring_id`   int(50)            NOT NULL COMMENT '手环id',
+    `date_time` datetime(3)        NOT NULL COMMENT '最后更新时间',
     KEY `Position_ring_id` (`ring_id`),
     CONSTRAINT `Position_ring_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
 ) ENGINE = InnoDB
@@ -133,11 +133,11 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `Posture`;
 CREATE TABLE `Posture`
 (
-    `id`           BigInt    NOT NULL AUTO_INCREMENT ,
+    `id`           BigInt      NOT NULL AUTO_INCREMENT,
     `acceleration` varchar(50) NOT NULL COMMENT '三轴加速度',
     `palstance`    varchar(50) NOT NULL COMMENT '三轴角速度',
     `ring_id`      int(50)     NOT NULL COMMENT '手环id',
-    `date_time`    datetime(3)    NOT NULL COMMENT '最后更新时间',
+    `date_time`    datetime(3) NOT NULL COMMENT '最后更新时间',
     PRIMARY KEY (`id`),
     KEY `Posture_ring_id` (`ring_id`),
     CONSTRAINT `Posture_ring_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)

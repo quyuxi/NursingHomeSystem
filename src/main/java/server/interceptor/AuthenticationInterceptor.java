@@ -50,12 +50,11 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
     private boolean hasPermission(HttpServletRequest request) {
         String token = request.getHeader("token");
-        LOGGER.debug("开始校验token :"+token);
+        LOGGER.debug("开始校验token :" + token);
         if (StringUtils.isEmpty(token)) {
             LOGGER.error("没有在请求中发现token");
             return false;
         }
-        ;
         Collection<String> values = TOKEN_CACHE.values();
         if (!values.contains(token)) {
             LOGGER.error("该token无效，token: " + token);

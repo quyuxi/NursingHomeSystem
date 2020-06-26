@@ -96,7 +96,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createNewUser(@RequestBody SystemUser user) {
-        LOGGER.debug("创建新用户,"+ JSON.toJSONString(user,true));
+        LOGGER.debug("创建新用户," + JSON.toJSONString(user, true));
         if (systemUserService.findUserInfoById(user.getId()) != null) {
             return CREATE__REPEATNAME;
         }
@@ -110,7 +110,7 @@ public class SystemUserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateUser(@RequestBody SystemUser user) {
-        LOGGER.debug("更新用户信息,"+ JSON.toJSONString(user,true));
+        LOGGER.debug("更新用户信息," + JSON.toJSONString(user, true));
         if (systemUserService.findUserInfoById(user.getId()) == null) {
             return UPDATE_NULL;
         }
@@ -133,7 +133,7 @@ public class SystemUserController {
     @Admin
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") String id) {
-        LOGGER.info("删除用户"+id);
+        LOGGER.info("删除用户" + id);
         if (systemUserService.deleteSystemUserById(id))
             return DELETE_SUCCESS;
         return DELETE_FAILD;

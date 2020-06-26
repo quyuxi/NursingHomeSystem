@@ -26,8 +26,8 @@ public class IotServerBootStrap {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IotServerBootStrap.class);
 
-    @Value("${iot.port}")
-    private  Integer servicePort;
+    @Value("${iot.server.port}")
+    private Integer servicePort;
 
 
     public void start() {

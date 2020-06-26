@@ -29,8 +29,9 @@
     </update>
 
     <delete id="deleteByElderId" parameterType="int">
-        update RingInfo set isDeleted=1
-        where ring_id=#{ringId}
+        update RingInfo
+        set isDeleted=1
+        where ring_id = #{ringId}
     </delete>
 
 
