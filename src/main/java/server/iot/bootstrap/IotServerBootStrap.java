@@ -9,6 +9,8 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import server.iot.emergency.KinestateEmergencyListener;
 import server.iot.emergency.OverstepEmergencyListener;
 import server.iot.emergency.PhysicalEmergencyListener;
@@ -18,19 +20,15 @@ import server.iot.handler.RegroupMsgHandler;
 import server.iot.handler.RingObjDecoder;
 
 
+@Component
 public class IotServerBootStrap {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IotServerBootStrap.class);
-    private final int servicePort;
 
-    public IotServerBootStrap() {
-        this(1514);
-    }
+    @Value("${iot.port}")
+    private  Integer servicePort;
 
-    public IotServerBootStrap(int servicePort) {
-        this.servicePort = servicePort;
-    }
 
     public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -56,7 +54,8 @@ public class IotServerBootStrap {
     }
 
     private ChannelHandler getChildChannelHandler() {
-        ChannelHandler handler = new ChannelInitializer<SocketChannel>() {
+
+        return new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline()
@@ -67,8 +66,6 @@ public class IotServerBootStrap {
                 //TODO 添加其他handler
             }
         };
-
-        return handler;
     }
 
     private EmergencyRecognizeHandler getEmergencyHandler() {

@@ -1,8 +1,11 @@
+
+#数据库配置
 spring:
   datasource:
-    url: jdbc:mysql://121.196.47.181:3306/NursingHomeSystem?useUnicode=true&characterEncoding=UTF-8&useSSL=false&&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/NursingHomeSystem?useUnicode=true&characterEncoding=UTF-8&useSSL=false&&allowMultiQueries=true
     username: root
-    password: test@#678root
+#    password: test@#678root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 100
     maxActive: 500
@@ -16,11 +19,18 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
 
 
-
+# mybatis
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
+# 服务器IP级端口号配置
 server:
   address: 0.0.0.0
   port: 80
 
+#debug
 debug: true
+
+#iot配置项
+iot:
+  port: 1514

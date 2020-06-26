@@ -78,11 +78,10 @@
     </select>
 
 
-    <delete id="deleteElderById" parameterType="int">
-        delete
-        from Elder
-        where id = #{id}
-    </delete>
+    <update id="deleteElderById" parameterType="int">
+        update Elder set isDeleted=1
+        where id=#{id}
+    </update>
 
     <insert id="createElder" keyColumn="id" keyProperty="id" parameterType="server.pojo.Elder"
             useGeneratedKeys="true">

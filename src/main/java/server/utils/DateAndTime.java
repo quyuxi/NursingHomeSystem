@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateAndTime {
-    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     public static String getCurrentTimeAsStr() {
         //TODO 考虑带毫秒或者直接用时间戳

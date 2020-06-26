@@ -27,10 +27,10 @@
         where ring_id = #{ringId}
 
     </update>
-    <delete id="deleteByElderId">
-        delete
-        from RingInfo
-        where ring_id = #{id}
+
+    <delete id="deleteByElderId" parameterType="int">
+        update RingInfo set isDeleted=1
+        where ring_id=#{ringId}
     </delete>
 
 
@@ -106,12 +106,12 @@
         values (null, #{heartRate}, #{bloodPressuer}, #{temperature}, #{ringId}, #{dateTime})
     </insert>
     <insert id="insertRingInfo">
-        insert into RingInfo
+        insert into RingInfo(ring_id, battery, date_time)
         values (#{ringId}, #{battery}, #{dateTime})
     </insert>
 
     <insert id="createRingInfo">
-        insert into RingInfo
+        insert into RingInfo(ring_id, battery, date_time)
         values (#{ringId}, 100, #{dateTime})
     </insert>
 

@@ -20,7 +20,6 @@ public class RingRecord {
 
 
     @JsonIgnore
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private String time;
 
     public RingRecord() {

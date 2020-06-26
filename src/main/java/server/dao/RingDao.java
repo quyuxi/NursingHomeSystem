@@ -38,5 +38,5 @@ public interface RingDao {
 
     boolean createRingInfo(@Param("ringId") int ringId, @Param("battery") int battery, @Param("dateTime") String dateTime);
 
-    boolean deleteByElderId(int id);
+    boolean deleteByElderId(@Param("ringId") int ringId);
 }

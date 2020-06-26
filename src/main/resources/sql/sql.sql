@@ -22,6 +22,7 @@ CREATE TABLE `Elder`
     `joinTime` date         NOT NULL COMMENT "入院时间",
     `address`  varchar(255) COMMENT "家庭住址",
     `area`     varchar(255) NOT NULL COMMENT '活动范围',
+    `isDeleted` bool default false,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -42,7 +43,8 @@ CREATE TABLE `RingInfo`
 (
     `ring_id`   int(50)  NOT NULL COMMENT '手环id',
     `battery`   int(3)   NOT NULL COMMENT '电池电量',
-    `date_time` datetime NOT NULL COMMENT '最后更新时间',
+    `date_time` datetime(3) NOT NULL COMMENT '最后更新时间',
+    `isDeleted` bool default false,
     PRIMARY KEY (`ring_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -63,7 +65,7 @@ CREATE TABLE `RingKeyInfo`
 (
     `id`        BigInt NOT NULL ,
     `ring_id`   int(50)  NOT NULL COMMENT '手环id',
-    `date_time` datetime NOT NULL COMMENT '最后更新时间',
+    `date_time` datetime(3) NOT NULL COMMENT '最后更新时间',
     PRIMARY KEY (`id`),
     KEY `ringKeyInfo_ring_id` (`ring_id`),
     CONSTRAINT `ringKeyInfo_ring_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
@@ -88,7 +90,7 @@ CREATE TABLE `PhysicalData`
     `bloodPressuer` int(5)               NOT NULL COMMENT '血压',
     `temperature`   double(10, 0)        NOT NULL COMMENT '体温',
     `ring_id`       int(50)              NOT NULL COMMENT '手环id',
-    `date_time`     datetime             NOT NULL COMMENT '最后更新时间',
+    `date_time`     datetime(3)             NOT NULL COMMENT '最后更新时间',
 
     KEY `p_r_id` (`ring_id`),
     CONSTRAINT `p_r_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
@@ -112,7 +114,7 @@ CREATE TABLE `Position`
     `lat`       varchar(50)          NOT NULL COMMENT '纬度',
     `lng`       varchar(50)          NOT NULL COMMENT '经度',
     `ring_id`   int(50)              NOT NULL COMMENT '手环id',
-    `date_time` datetime             NOT NULL COMMENT '最后更新时间',
+    `date_time` datetime(3)             NOT NULL COMMENT '最后更新时间',
     KEY `Position_ring_id` (`ring_id`),
     CONSTRAINT `Position_ring_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
 ) ENGINE = InnoDB
@@ -135,7 +137,7 @@ CREATE TABLE `Posture`
     `acceleration` varchar(50) NOT NULL COMMENT '三轴加速度',
     `palstance`    varchar(50) NOT NULL COMMENT '三轴角速度',
     `ring_id`      int(50)     NOT NULL COMMENT '手环id',
-    `date_time`    datetime    NOT NULL COMMENT '最后更新时间',
+    `date_time`    datetime(3)    NOT NULL COMMENT '最后更新时间',
     PRIMARY KEY (`id`),
     KEY `Posture_ring_id` (`ring_id`),
     CONSTRAINT `Posture_ring_id` FOREIGN KEY (`ring_id`) REFERENCES `RingInfo` (`ring_id`)
